@@ -1,0 +1,367 @@
+/**
+ * FF Typescript Foundation Library
+ * Copyright 2018 Ralph Wiedemeier, Frame Factory GmbH
+ *
+ * License: MIT
+ */
+
+////////////////////////////////////////////////////////////////////////////////
+// COLORS
+
+$color-background: #424242 !default;
+$color-background-darker: darken($color-background, 16%) !default;
+$color-background-dark: darken($color-background, 8%) !default;
+$color-background-light: lighten($color-background, 10%) !default;
+$color-background-lighter: lighten($color-background, 16%) !default;
+$color-background-hover: $color-background-lighter !default;
+
+$color-primary: #e64a19 !default; // deep orange
+$color-primary-light: lighten($color-primary, 15%) !default;
+$color-primary-dark: darken($color-primary, 15%) !default;
+
+$color-secondary: #303f9f !default; // indigo
+$color-secondary-light: lighten($color-secondary, 15%) !default;
+$color-secondary-dark: darken($color-secondary, 15%) !default;
+
+$color-text: #c8c8c8 !default;
+$color-text-disabled: #808080 !default;
+$color-icon: #a0a0a0 !default;
+$color-icon-disabled: #606060 !default;
+
+$color-focus: $color-primary-light;
+$focus-outline: 1px solid $color-focus !default;
+$focus-outline-offset: 1px !default;
+
+////////////////////////////////////////////////////////////////////////////////
+// HELPERS
+
+@mixin full-size {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.fullsize {
+  @include full-size;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+// short hover animation
+$tx-short: 0.12s;
+// medium transition
+$tx-medium: 0.3s;
+
+////////////////////////////////////////////////////////////////////////////////
+// OVERLAY
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color $tx-medium;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// BUSYBOX
+
+.busy-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background: $color-background-dark;
+  border-radius: 5px;
+
+  .wheel {
+    font-size: 50px;
+    animation: spin 2s infinite linear;
+  }
+  .text {
+    font-size: 1.3em;
+    padding: 20px 0 0 0;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// BADGE
+
+.badge {
+  margin: 0 .1em;
+  padding: 0 .4em;
+  border-radius: .4em;
+  background-color: #01579B;
+
+  &.info {
+    background-color: #2E7D32;
+  }
+  &.warning {
+    background-color: #c35200;
+  }
+  &.error {
+    background-color: #c62828;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CONTROL
+
+.control {
+  display: inline-block;
+
+  &:focus {
+    outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// BUTTON
+
+.button {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 1px 8px;
+  background-color: $color-background-light;
+  transition: background-color $tx-short;
+  text-align: center;
+
+  & * {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:not(.disabled):hover {
+    background-color: $color-background-hover;
+  }
+  &.disabled {
+    color: $color-text-disabled;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CHECKBOX
+
+.checkbox {
+  display: inline-block;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+
+  .frame {
+    border-color: $color-icon;
+
+    &.selected {
+      background-color: $color-primary;
+    }
+  }
+
+  .mark {
+    border-color: $color-text;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// DROPDOWN
+
+.dropdown {
+  position: relative;
+  flex-shrink: 0;
+  background-color: $color-background-light;
+  transition: background-color $tx-short;
+
+  &:hover {
+    background-color: $color-background-hover;
+  }
+
+  select {
+    position: relative;
+    box-sizing: border-box;
+    padding: 1px 24px 1px 8px;
+    background-color: transparent;
+    border: none;
+
+    // hide triangle
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    optgroup, option {
+      background-color: $color-background;
+    }
+
+    &:focus {
+      outline: $focus-outline;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  // custom triangle
+  &:after {
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    top: 0.7em;
+    right: 8px;
+    content: "";
+    border-left: 0.35em solid transparent;
+    border-right: 0.35em solid transparent;
+    border-top: 0.4em solid;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// LINE-EDIT, TEXT-EDIT
+
+.line-edit {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 0.2em;
+  border: none;
+  outline: none;
+  font: inherit;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// SPLITTER
+
+.splitter-handle {
+  &:active {
+    background: $color-primary;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// TAB-CONTAINER, DOCKABLE
+
+.dockable-view {
+  position: relative;
+}
+
+.tab-container, .dockable-tab-container {
+  border: 1px solid $color-background-darker;
+
+  .header {
+    background: $color-background-darker;
+  }
+
+  .header-item {
+    padding: 3px 3px;
+    background: $color-background-darker;
+    color: $color-text-disabled;
+
+    &:hover {
+      color: $color-text;
+    }
+
+    &.active {
+      background: linear-gradient($color-background, $color-background-dark);
+      color: $color-text;
+    }
+
+    .content + .content {
+      margin-left: 3px;
+    }
+
+    .text, .icon, .button {
+      padding: 0 2px;
+    }
+
+    .button {
+      background: transparent;
+      color: $color-icon;
+      font-size: 0.85em;
+      cursor: pointer;
+
+      &:not(.disabled):hover {
+        color: $color-text;
+      }
+
+      &.disabled {
+        color: $color-icon-disabled;
+      }
+    }
+  }
+}
+
+.dockable-tab-container {
+  border: 1px solid $color-background-darker;
+}
+
+.dockable-sprite {
+  box-sizing: border-box;
+  background: rgba($color-secondary, 0.5);
+  border: 1px solid $color-secondary-light;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// DIAL
+
+.dial {
+  .wheel {
+    background-color: $color-background-light;
+    color: $color-primary;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// PROPERTY FIELD
+
+.property-field {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $color-background;
+  cursor: pointer;
+
+  .bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: $color-background-light;
+    transition: background-color $tx-short;
+  }
+
+  &:hover > .bar, &.dragging > .bar {
+    background-color: $color-background-hover;
+  }
+
+  .text {
+    position: relative;
+    text-align: left;
+    padding: 0 3px;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  input {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 2px;
+    border: none;
+    background: $color-background;
+    color: $color-text;
+
+    &:focus {
+      outline: $focus-outline;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CANVAS 3D
+
+.canvas-3d {
+  @include full-size;
+}

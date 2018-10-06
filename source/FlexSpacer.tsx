@@ -1,0 +1,52 @@
+/**
+ * FF Typescript Foundation Library
+ * Copyright 2018 Ralph Wiedemeier, Frame Factory GmbH
+ *
+ * License: MIT
+ */
+
+import * as React from "react";
+import { CSSProperties } from "react";
+
+////////////////////////////////////////////////////////////////////////////////
+
+/** Properties for [[FlexSpacer]] component. */
+export interface IFlexSpacerProps
+{
+    className?: string;
+    style?: CSSProperties;
+    grow?: number;
+    shrink?: number;
+    basis?: string;
+}
+
+const FlexSpacer: React.SFC<IFlexSpacerProps> = function(props)
+{
+    const {
+        className,
+        style,
+        grow,
+        shrink,
+        basis
+    } = props;
+
+    const defaultStyle: CSSProperties = {
+        flex: `${grow} ${shrink} ${basis}`
+    };
+
+    const styles = Object.assign({}, defaultStyle, style);
+
+    return (<div
+        className={className}
+        style={styles}
+    />);
+};
+
+FlexSpacer.defaultProps = {
+    className: "flex-spacer",
+    grow: 1,
+    shrink: 0,
+    basis: "auto"
+};
+
+export default FlexSpacer;

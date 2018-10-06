@@ -1,0 +1,36 @@
+{
+    "name": "ff-ui",
+    "version": "1.0.0",
+    "description": "FF UI Typescript/React Foundation Library",
+    "scripts": {
+        "build": "tsc -p source",
+        "test": "tsc -p test; mocha -c --ui tdd node_modules/@ff/test/ui/test.js || exit 0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/framelab/ff-ui.git"
+    },
+    "keywords": [
+        "typescript",
+        "react"
+    ],
+    "author": {
+        "name": "Ralph Wiedemeier",
+        "url": "https://about.me/ralphw"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/framelab/ff-ui/issues"
+    },
+    "homepage": "https://github.com/framelab/ff-ui#readme",
+    "devDependencies": {
+        "@types/chai": "^4.1.6",
+        "@types/mocha": "^5.2.5",
+        "@types/react": "^16.4.15",
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "typescript": "^3.1.1"
+    }
+}
