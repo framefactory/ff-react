@@ -8,7 +8,7 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
-import FlexItem from "../components/FlexItem";
+import FlexItem from "./FlexItem";
 
 ////////////////////////////////////////////////////////////////////////////////
 

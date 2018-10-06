@@ -8,7 +8,7 @@
 import * as React from "react";
 import { ReactElement } from "react";
 
-import FlexContainer from "../components/FlexContainer";
+import FlexContainer from "./FlexContainer";
 
 import {
     TabHeaderContainer,
