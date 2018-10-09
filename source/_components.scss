@@ -57,6 +57,34 @@ $tx-short: 0.12s;
 // medium transition
 $tx-medium: 0.3s;
 
+@mixin triangle($color, $size, $angle) {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0.6em;
+    left: 3px;
+    width: 0;
+    height: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    transform: rotate($angle);
+  }
+}
+
+@mixin dot($color, $size: 4px, $left: 5px, $top: 0.6em) {
+  &:before {
+    content: '';
+    position: absolute;
+    top: $top;
+    left: $left;
+    width: $size;
+    height: $size;
+    border: none;
+    background: $color;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // OVERLAY
 
@@ -237,6 +265,11 @@ $tx-medium: 0.3s;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// TREE
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 // TAB-CONTAINER, DOCKABLE
 
 .dockable-view {
@@ -246,7 +279,7 @@ $tx-medium: 0.3s;
 .tab-container, .dockable-tab-container {
   border: 1px solid $color-background-darker;
 
-  .header {
+  & > .header {
     background: $color-background-darker;
   }
 
