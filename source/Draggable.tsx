@@ -171,7 +171,6 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
 
             event.preventDefault();
         }
-
    }
 
     protected onPointerUp(event: PointerEvent)

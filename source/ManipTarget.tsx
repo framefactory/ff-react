@@ -28,6 +28,9 @@ export interface IManipBaseEvent
     sender: ManipTarget;
     id: string;
 
+    centerX: number;
+    centerY: number;
+
     shiftKey: boolean;
     ctrlKey: boolean;
     altKey: boolean;
@@ -47,8 +50,6 @@ export interface IManipPointerEvent extends IManipBaseEvent
 
     movementX: number;
     movementY: number;
-    centerX: number;
-    centerY: number;
 }
 
 export interface IManipTriggerEvent extends IManipBaseEvent
@@ -288,6 +289,9 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
 
             type,
             wheel,
+
+            centerX: event.clientX,
+            centerY: event.clientY,
 
             shiftKey: event.shiftKey,
             ctrlKey: event.ctrlKey,
