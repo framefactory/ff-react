@@ -137,6 +137,7 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
             }
         }
 
+        event.stopPropagation();
         event.preventDefault();
     }
 
@@ -169,6 +170,7 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
                 }
             }
 
+            event.stopPropagation();
             event.preventDefault();
         }
    }
@@ -200,6 +202,7 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
                 }
             }
 
+            event.stopPropagation();
             event.preventDefault();
         }
     }

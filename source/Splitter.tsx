@@ -176,29 +176,35 @@ export class SplitterContainer extends React.Component<ISplitterContainerProps, 
                 children.filter(child => (child as any).type === SplitterSection) as SplitterSectionElement[];
 
             const sectionCount = sections.length;
-            const sizes = [];
 
+            const numericSizes: number[] = [];
             let totalSize = 0;
             let sizeCount = 0;
 
             for (let i = 0; i < sectionCount; ++i) {
-                let size: any = sections[i].props.size || 0;
+                let size = sections[i].props.size;
+                let numericSize = 0;
 
-                if (typeof size === "string") {
-                    if (size.endsWith("%")) {
-                        size = Number.parseFloat(size) / 100;
+                if (size) {
+                    if (typeof size === "string") {
+                        if (size.endsWith("%")) {
+                            numericSize = Number.parseFloat(size) / 100;
+                        }
+                        else {
+                            numericSize = Number.parseFloat(size);
+                        }
                     }
                     else {
-                        size = Number.parseFloat(size);
+                        numericSize = size;
                     }
                 }
 
-                if (size > 0) {
-                    totalSize += size;
+                if (numericSize > 0) {
+                    totalSize += numericSize;
                     sizeCount++;
                 }
 
-                sizes.push(size);
+                numericSizes.push(numericSize);
             }
 
             let defaultSize = 0;
@@ -219,11 +225,12 @@ export class SplitterContainer extends React.Component<ISplitterContainerProps, 
 
             for (let i = 0; i < sectionCount; ++i) {
                 // update splitter section size
-                if (sizes[i] > 0) {
-                    sizes[i] = (sizes[i] / totalSize * 100).toFixed(3) + "%";
+                let size;
+                if (numericSizes[i] > 0) {
+                    size = (numericSizes[i] / totalSize * 100).toFixed(3) + "%";
                 }
                 else {
-                    sizes[i] = (defaultSize / totalSize * 100).toFixed(3) + "%";
+                    size =(defaultSize / totalSize * 100).toFixed(3) + "%";
                 }
 
                 // if no key is provided, add one
@@ -231,7 +238,7 @@ export class SplitterContainer extends React.Component<ISplitterContainerProps, 
 
                 // add splitter section
                 components.push(
-                    React.cloneElement(sections[i], { key: "s" + key, size: sizes[i] })
+                    React.cloneElement(sections[i], { key: "s" + key, size })
                 );
 
                 // insert a splitter handle between sections
