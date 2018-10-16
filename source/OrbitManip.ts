@@ -13,13 +13,14 @@ import { IManipEventHandler, IManipPointerEvent, IManipTriggerEvent } from "./Ma
 type ManipMode = "off" | "pan" | "orbit" | "dolly" | "zoom" | "pan-dolly" | "roll";
 type ManipPhase = "off" | "active" | "release";
 
-export interface IDeltaOrbitPose
+export interface IDeltaOrbitManip
 {
     dX: number;
     dY: number;
-    dHead: number;
-    dPitch: number;
     dScale: number;
+    dPitch: number;
+    dHead: number;
+    dRoll: number;
 }
 
 export default class OrbitManip implements IManipEventHandler
@@ -34,7 +35,7 @@ export default class OrbitManip implements IManipEventHandler
     protected deltaPinch: number;
     protected deltaWheel: number;
 
-    protected deltaOrbit: IDeltaOrbitPose;
+    protected deltaOrbit: IDeltaOrbitManip;
 
     constructor()
     {
@@ -51,13 +52,14 @@ export default class OrbitManip implements IManipEventHandler
         this.deltaOrbit = {
             dX: 0,
             dY: 0,
+            dScale: 1,
             dHead: 0,
             dPitch: 0,
-            dScale: 1
+            dRoll: 0
         };
     }
 
-    getDeltaPose(): IDeltaOrbitPose
+    getDeltaPose(): IDeltaOrbitManip
     {
         if (this.phase === "off" && this.deltaWheel === 0) {
             return null;
@@ -155,22 +157,30 @@ export default class OrbitManip implements IManipEventHandler
         const delta = this.deltaOrbit;
         delta.dX = 0;
         delta.dY = 0;
+        delta.dScale = 1;
         delta.dHead = 0;
         delta.dPitch = 0;
-        delta.dScale = 1;
+        delta.dRoll = 0;
 
         switch(this.mode) {
             case "orbit":
                 delta.dHead = this.deltaX;
                 delta.dPitch = this.deltaY;
                 break;
+
             case "pan":
                 delta.dX = this.deltaX;
                 delta.dY = this.deltaY;
                 break;
+
+            case "roll":
+                delta.dRoll = this.deltaX;
+                break;
+
             case "dolly":
                 delta.dScale = this.deltaY * 0.0075 + 1;
                 break;
+
             case "pan-dolly":
                 delta.dX = this.deltaX;
                 delta.dY = this.deltaY;
@@ -199,7 +209,12 @@ export default class OrbitManip implements IManipEventHandler
 
             // right button
             if (button === 2) {
-                return "pan";
+                if (event.altKey) {
+                    return "roll";
+                }
+                else {
+                    return "pan";
+                }
             }
 
             // middle button

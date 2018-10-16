@@ -170,7 +170,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
 
     protected onPointerUpOrCancel(event: PointerEvent)
     {
-        this.activePointers[event.pointerId] = undefined;
+        this.activePointers[event.pointerId] = event;
         this.downPointerCount--;
 
         const manipEvent = this.createManipPointerEvent(event, "up");
@@ -183,6 +183,8 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
             event.stopPropagation();
             event.preventDefault();
         }
+
+        this.activePointers[event.pointerId] = undefined;
     }
 
     protected onDoubleClick(event: MouseEvent)
