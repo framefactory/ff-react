@@ -7,6 +7,7 @@
 
 import * as React from "react";
 import { CSSProperties, ReactNode, MouseEvent, PointerEvent } from "react";
+import { IComponentProps } from "./common";
 
 const _verbose = false;
 
@@ -16,11 +17,8 @@ export type MouseEvent = MouseEvent<HTMLDivElement>;
 export type PointerEvent = PointerEvent<HTMLDivElement>;
 
 /** Properties for [[Pointable]] component. */
-export interface IPointableProps
+export interface IPointableProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
-
     capture?: boolean;
 
     onPointerDown?: (event: PointerEvent) => void;

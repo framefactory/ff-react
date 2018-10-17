@@ -8,15 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[FlexItem]] component. */
-export interface IFlexItemProps
+export interface IFlexItemProps extends IComponentProps
 {
-    /** Class name for the wrapper div element. */
-    className?: string;
-    /** CSS style properties for the wrapper div element. */
-    style?: CSSProperties;
     /** If given, receives a reference to the wrapper div element when mounted. */
     elementRef?: React.RefObject<HTMLDivElement>;
     /** How much this item is allowed to grow in a flex layout. Default is 1. */

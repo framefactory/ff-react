@@ -8,15 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[GridContainer]] component. */
-export interface IGridContainerProps
+export interface IGridContainerProps extends IComponentProps
 {
-    /** Class name for the container div element. Default is "grid-container". */
-    className?: string;
-    /** CSS style properties for the container div element. */
-    style?: CSSProperties;
     /** How the container is positioned with respect to its parent. Default is "relative". */
     position?: string;
     /** Defines the columns in the grid with a space-separated list of values.  */

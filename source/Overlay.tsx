@@ -9,14 +9,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { CSSProperties } from "react";
+import { IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[Overlay]] component. */
-export interface IOverlayProps
+export interface IOverlayProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
     modal?: boolean;
     zIndex?: number;
 }

@@ -8,6 +8,8 @@
 import * as React from "react";
 import { MouseEvent, WheelEvent, PointerEvent, SyntheticEvent } from "react";
 
+import { IComponentProps, IComponentEvent } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 export type ManipPointerEventType = "down" | "move" | "up";
@@ -23,11 +25,8 @@ export interface IManipEventHandler
     onTrigger: (event: IManipTriggerEvent) => boolean;
 }
 
-export interface IManipBaseEvent
+export interface IManipBaseEvent extends IComponentEvent<ManipTarget>
 {
-    sender: ManipTarget;
-    id: string;
-
     centerX: number;
     centerY: number;
 
@@ -61,12 +60,8 @@ export interface IManipTriggerEvent extends IManipBaseEvent
 }
 
 /** Properties for [[ManipTarget]] component. */
-export interface IManipTargetProps
+export interface IManipTargetProps extends IComponentProps
 {
-    /** Unique identifier for this component. */
-    id?: string;
-    /** Class name for this component. Default is "manip-target". */
-    className?: string;
     /** Captures a pointer after pressed. Default is true. */
     capture?: boolean;
     /** Handler for manip events; an object implementing the [[IManipHandler]] interface. */
@@ -258,6 +253,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
             source: event.pointerType,
             sender: this,
             id: this.props.id,
+            index: this.props.index,
 
             isPrimary: event.isPrimary,
             activePointerList: pointerList,
@@ -288,6 +284,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
             originalEvent: event,
             sender: this,
             id: this.props.id,
+            index: this.props.index,
 
             type,
             wheel,

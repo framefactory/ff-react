@@ -22,7 +22,7 @@ import {
     TabContentContainer,
     TabContentItem
 } from "./TabContent";
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -61,10 +61,8 @@ export interface ITabCloseEvent extends ITabSelectEvent {}
 export interface ITabDropEvent extends ITabSelectEvent { sourceTabId: string }
 
 /** Properties for [[TabContainer]] component. */
-export interface ITabContainerProps
+export interface ITabContainerProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
     activeTabId?: string;
     onTabSelect?: (event: ITabSelectEvent) => void;
     onTabClose?: (event: ITabCloseEvent) => void;
@@ -190,22 +188,28 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
     {
         this.setState({ activeTabId: event.id });
 
-        if (this.props.onTabSelect) {
-            this.props.onTabSelect({ tabId: event.id, id: this.props.id, sender: this });
+        const { id, index, onTabSelect } = this.props;
+
+        if (onTabSelect) {
+            onTabSelect({ tabId: event.id, id, index, sender: this });
         }
     }
 
     protected onClose(event: ITabHeaderCloseEvent)
     {
-        if (this.props.onTabClose) {
-            this.props.onTabClose({ tabId: event.id, id: this.props.id, sender: this });
+        const { id, index, onTabClose } = this.props;
+
+        if (onTabClose) {
+            onTabClose({ tabId: event.id, id, index, sender: this });
         }
     }
 
     protected onDrop(event: ITabHeaderDropEvent)
     {
-        if (this.props.onTabDrop) {
-            this.props.onTabDrop({ sourceTabId: event.sourceTabId, tabId: event.id, id: this.props.id, sender: this });
+        const { id, index, onTabDrop } = this.props;
+
+        if (onTabDrop) {
+            onTabDrop({ sourceTabId: event.sourceTabId, tabId: event.id, id, index, sender: this });
         }
     }
 }

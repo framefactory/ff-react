@@ -8,13 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[FlexSpacer]] component. */
-export interface IFlexSpacerProps
+export interface IFlexSpacerProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
     grow?: number;
     shrink?: number;
     basis?: string;

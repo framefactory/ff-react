@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties, MouseEvent, PointerEvent, ReactNode } from "react";
+import { MouseEvent, PointerEvent, ReactNode } from "react";
 
 import { IComponentProps, IComponentEvent } from "./common";
 import { IPointableProps } from "./Pointable";
@@ -24,9 +24,6 @@ export interface IDraggableDoubleTapEvent extends IComponentEvent<Draggable> { }
 /** Properties for [[Draggable]] component. */
 export interface IDraggableProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
-
     capture?: boolean;
     draggable?: boolean;
 
@@ -132,8 +129,10 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
             this.lastX = this.startX;
             this.lastY = this.startY;
 
-            if (props.onPress) {
-                props.onPress({ id: props.id, sender: this });
+            const { id, index, onPress } = this.props;
+
+            if (onPress) {
+                onPress({ id, index, sender: this });
             }
         }
 
@@ -177,19 +176,19 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
 
     protected onPointerUp(event: PointerEvent)
     {
-        const props = this.props;
         const state = this.state;
+        const { id, index, onPointerUp, onRelease, onTap } = this.props;
 
-        if (props.onPointerUp) {
-            props.onPointerUp(event);
+        if (onPointerUp) {
+            onPointerUp(event);
         }
 
         if (event.isPrimary && this.isActive) {
 
             this.isActive = false;
 
-            if (props.onRelease) {
-                props.onRelease({ id: props.id, sender: this });
+            if (onRelease) {
+                onRelease({ id, index, sender: this });
             }
 
             if (state.isDragging) {
@@ -197,8 +196,8 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
                 this.onDragEnd(event);
             }
             else {
-                if (props.onTap) {
-                    props.onTap({ id: props.id, sender: this });
+                if (onTap) {
+                    onTap({ id, index, sender: this });
                 }
             }
 
@@ -211,9 +210,10 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
     protected onDoubleClick()
     {
         if (!this.state.isDragging) {
+            const { id, index, onDoubleTap } = this.props;
 
-            if (this.props.onDoubleTap) {
-                this.props.onDoubleTap({ id: this.props.id, sender: this });
+            if (onDoubleTap) {
+                onDoubleTap({ id, index, sender: this });
             }
         }
     }

@@ -8,17 +8,15 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 import Button from "./Button";
 import DragSource from "./DragSource";
 import DropTarget, { IPointerDragEvent } from "./DropTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface ITabHeaderContainerProps
+export interface ITabHeaderContainerProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
 }
 
 export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps, {}>
@@ -49,16 +47,14 @@ export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps
     }
 }
 
-export interface ITabHeaderSelectEvent extends IComponentEvent<TabHeaderItem> { }
-export interface ITabHeaderCloseEvent extends IComponentEvent<TabHeaderItem> { }
-export interface ITabHeaderDropEvent extends IComponentEvent<TabHeaderItem> { sourceTabId: string }
+export interface ITabHeaderSelectEvent extends IComponentEvent<TabHeaderItem> { id: string }
+export interface ITabHeaderCloseEvent extends IComponentEvent<TabHeaderItem> { id: string }
+export interface ITabHeaderDropEvent extends IComponentEvent<TabHeaderItem> { id: string, sourceTabId: string }
 
 
-export interface ITabHeaderItemProps
+export interface ITabHeaderItemProps extends IComponentProps
 {
     id: string;
-    className?: string;
-    style?: CSSProperties;
     text?: string;
     icon?: string;
     faIcon?: string;
@@ -178,22 +174,28 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
 
     protected onSelect()
     {
-        if (this.props.onSelect) {
-            this.props.onSelect({ id: this.props.id, sender: this });
+        const { id, index, onSelect } = this.props;
+
+        if (onSelect) {
+            onSelect({ id, index, sender: this });
         }
     }
 
     protected onClose()
     {
-        if (this.props.onClose) {
-            this.props.onClose({ id: this.props.id, sender: this });
+        const { id, index, onClose } = this.props;
+
+        if (onClose) {
+            onClose({ id, index, sender: this });
         }
     }
 
     private onDrop(event: IPointerDragEvent)
     {
-        if (this.props.onDrop) {
-            this.props.onDrop({ sourceTabId: event.payload, id: this.props.id, sender: this });
+        const { id, index, onDrop } = this.props;
+
+        if (onDrop) {
+            onDrop({ sourceTabId: event.payload, id, index, sender: this });
         }
     }
 

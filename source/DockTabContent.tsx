@@ -8,7 +8,7 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 import FlexItem from "./FlexItem";
 import DropTarget, { IPointerDragEvent } from "./DropTarget";
 
@@ -23,10 +23,8 @@ export interface IDockTabContentDropEvent extends IComponentEvent<DockTabContent
 }
 
 /** Properties for [[DockableTabContent]] component. */
-export interface IDockTabContentContainerProps
+export interface IDockTabContentContainerProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
     onDrop?: (event: IDockTabContentDropEvent) => void;
 }
 
@@ -104,14 +102,15 @@ export class DockTabContentContainer
 
     private onDrop(event: IPointerDragEvent)
     {
-        const props = this.props;
         const state = this.state;
+        const { id, index, onDrop } = this.props;
 
-        if (state.dockArea !== "none" && props.onDrop) {
+        if (state.dockArea !== "none" && onDrop) {
             this.props.onDrop({
                 sourceTabId: event.payload,
                 dockArea: state.dockArea,
-                id: props.id,
+                id,
+                index,
                 sender: this
             });
         }

@@ -8,7 +8,7 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 import Draggable, { PointerEvent } from "./Draggable";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -29,13 +29,8 @@ export interface IPropertyFieldChangeEvent extends IComponentEvent<PropertyField
 export interface IPropertyFieldCommitEvent extends IComponentEvent<PropertyField> { value: number | string | boolean }
 
 /** Properties for [[PropertyField]] component. */
-export interface IPropertyFieldProps
+export interface IPropertyFieldProps extends IComponentProps
 {
-    id?: string;
-    /** The default class is "button". Use this property to override. */
-    className?: string;
-    style?: CSSProperties;
-
     value?: any;
     format?: IPropertyFieldFormat;
     onChange?: (event: IPropertyFieldChangeEvent) => void;
@@ -174,11 +169,13 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
     {
         this.setState({ value: value });
 
-        if (this.props.onChange) {
-            this.props.onChange({ value, id: this.props.id, sender: this });
+        const { id, index, onChange, onCommit } = this.props;
+
+        if (onChange) {
+            onChange({ value, id, index, sender: this });
         }
-        if (this.props.onCommit) {
-            this.props.onCommit({ value, id: this.props.id, sender: this });
+        if (onCommit) {
+            onCommit({ value, id, index, sender: this });
         }
     }
 
@@ -187,9 +184,10 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
 
         this.setState(prevState => {
             const value = this.checkBounds(prevState.value + delta);
+            const { id, index, onChange } = this.props;
 
-            if (this.props.onChange) {
-                this.props.onChange({ value, id: this.props.id, sender: this });
+            if (onChange) {
+                onChange({ value, id, index, sender: this });
             }
 
             return { value };

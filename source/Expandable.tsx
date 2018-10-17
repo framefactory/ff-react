@@ -8,17 +8,15 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
 import Button, { IButtonTapEvent } from "./Button";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export interface IExpandableHeaderTapEvent extends IButtonTapEvent { }
 
-export interface IExpandableHeaderProps
+export interface IExpandableHeaderProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
     onTap?: (event: IExpandableHeaderTapEvent) => void;
 }
 

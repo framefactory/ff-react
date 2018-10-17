@@ -6,9 +6,8 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -17,11 +16,8 @@ export interface ILineEditFocusEvent extends IComponentEvent<LineEdit> { text: s
 export interface ILineEditBlurEvent extends IComponentEvent<LineEdit> { text: string }
 
 /** Properties for [[LineEdit]] component. */
-export interface ILineEditProps
+export interface ILineEditProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
     text?: string;
     placeholder?: string;
     focused?: boolean;
@@ -87,22 +83,28 @@ export default class LineEdit extends React.Component<ILineEditProps, {}>
 
     protected onFocus()
     {
-        if (this.props.onFocus) {
-            this.props.onFocus({ text: this.element.value, id: this.props.id, sender: this });
+        const { id, index, onFocus } = this.props;
+
+        if (onFocus) {
+            onFocus({ text: this.element.value, id, index, sender: this });
         }
     }
 
     protected onBlur()
     {
-        if (this.props.onBlur) {
-            this.props.onBlur({ text: this.element.value, id: this.props.id, sender: this });
+        const { id, index, onBlur } = this.props;
+
+        if (onBlur) {
+            onBlur({ text: this.element.value, id, index, sender: this });
         }
     }
 
     protected onChange()
     {
-        if (this.props.onChange) {
-            this.props.onChange({ text: this.element.value, id: this.props.id, sender: this });
+        const { id, index, onChange } = this.props;
+
+        if (onChange) {
+            onChange({ text: this.element.value, id, index, sender: this });
         }
     }
 }

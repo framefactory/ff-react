@@ -8,15 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[FlexContainer]] component. */
-export interface IFlexContainerProps
+export interface IFlexContainerProps extends IComponentProps
 {
-    /** Class name for the container div element. Default is "flex-container". */
-    className?: string;
-    /** CSS style properties for the container div element. */
-    style?: CSSProperties;
     /** Direction of the flex layout. */
     direction?: "horizontal" | "vertical";
     /** How the container is positioned with respect to its parent. Default is "relative". */

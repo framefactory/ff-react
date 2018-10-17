@@ -103,8 +103,10 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
             window.removeEventListener("resize", this.onResize);
         }
 
-        if (this.props.onCanvas) {
-            this.props.onCanvas({ canvas, id: this.props.id, sender: this });
+        const { id, index, onCanvas } = this.props;
+
+        if (onCanvas) {
+            onCanvas({ canvas, id, index, sender: this });
         }
 
         this.onResize();
@@ -121,8 +123,10 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
 
-        if (this.props.onResize) {
-            this.props.onResize({ canvas, width, height, id: this.props.id, sender: this });
+        const { id, index, onResize } = this.props;
+
+        if (onResize) {
+            onResize({ canvas, width, height, id, index, sender: this });
         }
     }
 }

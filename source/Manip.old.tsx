@@ -59,9 +59,6 @@ export interface IManipListener
 
 export interface IManipProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
-
     capture?: boolean;
     listener?: IManipListener;
 
@@ -354,6 +351,7 @@ export default class Manip extends React.Component<IManipProps, {}>
 
         return {
             id: this.props.id,
+            index: this.props.index,
             sender: this,
 
             pointerEvent: event,
@@ -385,6 +383,7 @@ export default class Manip extends React.Component<IManipProps, {}>
     {
         return {
             id: this.props.id,
+            index: this.props.index,
             sender: this,
 
             pointerEvent: null,

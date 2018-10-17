@@ -6,7 +6,9 @@
  */
 
 import * as React from "react";
-import { CSSProperties, MouseEvent } from "react";
+import { MouseEvent } from "react";
+
+import { IComponentProps } from "./common";
 
 const _div = document.createElement('div');
 const _fileDropSupported = (('draggable' in _div) || ('ondragstart' in _div && 'ondrop' in _div))
@@ -15,11 +17,8 @@ const _fileDropSupported = (('draggable' in _div) || ('ondragstart' in _div && '
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[FileDropTarget]] component. */
-export interface IFileDropTargetProps
+export interface IFileDropTargetProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
-    id?: string;
     fileTypes?: string;
     onFiles?: (files: FileList, id: string, sender: FileDropTarget) => void;
 }

@@ -8,13 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[Label]] component. */
-export interface ILabelProps
+export interface ILabelProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
     text?: string;
 }
 

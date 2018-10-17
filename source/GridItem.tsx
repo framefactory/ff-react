@@ -8,13 +8,13 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
+import { IComponentProps } from "./common";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[GridItem]] component. */
-export interface IGridItemProps
+export interface IGridItemProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
     elementRef?: React.RefObject<HTMLDivElement>;
     column?: number;
     row?: number;

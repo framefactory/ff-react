@@ -48,21 +48,24 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
 
     protected onSelect(event: ITabHeaderSelectEvent)
     {
-        if (this.props.onTabSelect) {
-            this.props.onTabSelect({ tabId: event.id, id: this.props.id, sender: this });
+        const { id, index, onTabSelect } = this.props;
+
+        if (onTabSelect) {
+            onTabSelect({ tabId: event.id, id, index, sender: this });
         }
     }
 
     protected onDockableDrop(event: IDockTabContentDropEvent)
     {
-        const props = this.props as IDockTabContainerProps;
+        const { id, index, onTabDrop } = this.props as IDockTabContainerProps;
 
-        if (props.onTabDrop) {
-            props.onTabDrop({
+        if (onTabDrop) {
+            onTabDrop({
                 sourceTabId: event.sourceTabId,
                 tabId: this.state.activeTabId,
                 dockArea: event.dockArea,
-                id: this.props.id,
+                id,
+                index,
                 sender: this
             });
         }

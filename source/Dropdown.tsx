@@ -8,23 +8,19 @@
 import * as React from "react";
 import { ChangeEvent, CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 export interface IDropdownSelectEvent extends IComponentEvent<Dropdown>
 {
-    index: number,
+    selectedIndex: number,
     option: string
 }
 
 /** Properties for [[Dropdown]] component. */
-export interface IDropdownProps
+export interface IDropdownProps extends IComponentProps
 {
-    id?: string;
-    /** The default class is "button". Use this property to override. */
-    className?: string;
-    style?: CSSProperties;
     options: string[];
     /** Event fired after a new option from the drop down menu has been selected. */
     onSelect?: (event: IDropdownSelectEvent) => void;
@@ -79,13 +75,13 @@ export default class Dropdown extends React.Component<IDropdownProps, {}>
 
     onChange(e: ChangeEvent<HTMLSelectElement>)
     {
-        const props = this.props;
+        const { id, index, onSelect } = this.props;
 
-        if (props.onSelect) {
+        if (onSelect) {
             const select = e.target;
-            const index = select.selectedIndex;
+            const selectedIndex = select.selectedIndex;
             const option = select[index] as HTMLOptionElement;
-            props.onSelect({ index, option: option.label, id: props.id, sender: this });
+            onSelect({ selectedIndex, option: option.label, id, index, sender: this });
         }
     }
 }

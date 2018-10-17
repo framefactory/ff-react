@@ -216,18 +216,22 @@ export default class Dialog extends React.Component<IDialogProps, {}>
             return;
         }
 
+        const { id, index, onTapModal } = this.props;
+
         // report tap on modal plane
-        if (this.props.onTapModal) {
-            this.props.onTapModal({ id: this.props.id, sender: this });
+        if (onTapModal) {
+            onTapModal({ id, index, sender: this });
         }
     }
 
     protected onModalPlaneKeyPress(event: KeyboardEvent<HTMLDivElement>)
     {
+        const { id, index, onTapModal } = this.props;
+
         // if escape key pressed
-        if (event.keyCode === 27 && this.props.onTapModal) {
+        if (event.keyCode === 27 && onTapModal) {
             // report tap on modal plane
-            this.props.onTapModal({ id: this.props.id, sender: this });
+            onTapModal({ id, index, sender: this });
         }
     }
 

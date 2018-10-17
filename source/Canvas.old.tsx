@@ -8,7 +8,7 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,11 +26,8 @@ export interface ICanvasPainter
     destroyContext: (canvas: Canvas) => void;
 }
 
-export interface ICanvasProps
+export interface ICanvasProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
     resolution?: number;
     onResize?: (event: ICanvasResizeEvent) => void;
     onCreateContext?: (event: ICanvasCreateContextEvent) => void;
@@ -104,13 +101,13 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
 
     componentDidMount()
     {
-        const props = this.props;
+        const { id, index, painter, onCreateContext } = this.props;
 
-        if (props.painter) {
-            props.painter.createContext(this);
+        if (painter) {
+            painter.createContext(this);
         }
-        else if (props.onCreateContext) {
-            props.onCreateContext({ id: this.props.id, sender: this });
+        else if (onCreateContext) {
+            onCreateContext({ id, index, sender: this });
         }
 
         this.resize();
@@ -119,13 +116,13 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
 
     componentWillUnmount()
     {
-        const props = this.props;
+        const { id, index, painter, onDestroyContext } = this.props;
 
-        if (props.painter) {
-            props.painter.destroyContext(this);
+        if (painter) {
+            painter.destroyContext(this);
         }
-        else if (props.onDestroyContext) {
-            props.onDestroyContext({ id: this.props.id, sender: this })
+        else if (onDestroyContext) {
+            onDestroyContext({ id, index, sender: this })
         }
 
         window.removeEventListener("resize", this.resize);
@@ -158,13 +155,13 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
         const width = canvasElement.width = canvasElement.offsetWidth * resolution;
         const height = canvasElement.height = canvasElement.offsetHeight * resolution;
 
-        const props = this.props;
+        const { id, index, painter, onResize } = this.props;
 
-        if (props.painter) {
-            props.painter.resize(width, height, resolution);
+        if (painter) {
+            painter.resize(width, height, resolution);
         }
-        else if (props.onResize) {
-            props.onResize({ width, height, resolution, id: this.props.id, sender: this });
+        else if (onResize) {
+            onResize({ width, height, resolution, id, index, sender: this });
         }
     }
 }

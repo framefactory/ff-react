@@ -14,8 +14,10 @@ import { CSSProperties } from "react";
  */
 export interface IComponentEvent<T>
 {
-    /** Custom identifier of the component the event originates from (supplied as part of the component's properties). */
+    /** Custom identifier of the component the event originates from. */
     id: string;
+    /** Custom numeric index of the component the event originates from. */
+    index: number;
     /** The component the event originates from. */
     sender: T;
 }
@@ -27,6 +29,8 @@ export interface IComponentProps
 {
     /** Custom identifier for the component. */
     id?: string;
+    /** Custom numeric index for the component. */
+    index?: number;
     /** Overrides the default class for the component if given. */
     className?: string;
     /** Additional styles applied to the component. */

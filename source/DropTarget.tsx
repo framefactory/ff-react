@@ -6,7 +6,8 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+
+import { IComponentProps } from "./common";
 import { IPointerDragEvent } from "./DragSource";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -14,10 +15,8 @@ import { IPointerDragEvent } from "./DragSource";
 export { IPointerDragEvent } from "./DragSource";
 
 /** Properties for [[DropTarget]] component. */
-export interface IDropTargetProps
+export interface IDropTargetProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
     title?: string;
     payloadTypes?: string[];
 

@@ -6,23 +6,19 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+
+import { IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface IExpandableGroupProps
+export interface IExpandableGroupProps extends IComponentProps
 {
-    className?: string;
-    style?: CSSProperties;
 }
 
 export default class ExpandableGroup extends React.Component<IExpandableGroupProps, any>
 {
     static defaultProps: IExpandableGroupProps = {
         className: "ExpandableGroup"
-    };
-
-    private static style: CSSProperties = {
     };
 
     constructor(props: IExpandableGroupProps)
@@ -38,11 +34,9 @@ export default class ExpandableGroup extends React.Component<IExpandableGroupPro
             children
         } = this.props;
 
-        const stylesCombined = Object.assign({}, ExpandableGroup.style, style);
-
         return (<div
             className={className}
-            style={stylesCombined} >
+            style={style} >
 
             {children}
         </div>);

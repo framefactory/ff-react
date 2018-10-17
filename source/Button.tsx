@@ -198,8 +198,10 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
         if (this.pointerId === -1) {
             this.pointerId = event.pointerId;
 
-            if (this.props.onDown) {
-                this.props.onDown({ id: this.props.id, sender: this });
+            const { id, index, onDown } = this.props;
+
+            if (onDown) {
+                onDown({ id, index, sender: this });
             }
         }
 
@@ -211,25 +213,25 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
         if (this.pointerId === event.pointerId) {
             this.pointerId = -1;
 
-            const props = this.props;
+            const { id, index, selectable, onSelect, onUp, onTap } = this.props;
 
-            if (props.selectable) {
+            if (selectable) {
                 this.setState(prevState => {
                     const selected = !prevState.selected;
 
-                    if (props.onSelect) {
-                        props.onSelect({ selected, id: props.id, sender: this });
+                    if (onSelect) {
+                        onSelect({ selected, id, index, sender: this });
                     }
 
                     return { selected };
                 });
             }
 
-            if (props.onUp) {
-                props.onUp({ id: props.id, sender: this });
+            if (onUp) {
+                onUp({ id, index, sender: this });
             }
-            if (props.onTap) {
-                props.onTap({ id: props.id, sender: this });
+            if (onTap) {
+                onTap({ id, index, sender: this });
             }
         }
 
@@ -240,9 +242,10 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
     {
         if (this.pointerId === event.pointerId) {
             this.pointerId = -1;
+            const { id, index, onUp } = this.props;
 
-            if (this.props.onUp) {
-                this.props.onUp({ id: this.props.id, sender: this });
+            if (onUp) {
+                onUp({ id, index, sender: this });
             }
         }
     }
@@ -250,10 +253,10 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
     protected onKeyDown(event: KeyboardEvent<HTMLDivElement>)
     {
         if (event.keyCode === 32) {
-            const props = this.props;
+            const { id, index, onDown } = this.props;
 
-            if (props.onDown) {
-                props.onDown({ id: this.props.id, sender: this });
+            if (onDown) {
+                onDown({ id, index, sender: this });
             }
         }
     }
@@ -261,25 +264,25 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
     protected onKeyUp(event: KeyboardEvent<HTMLDivElement>)
     {
         if (event.keyCode === 32) {
-            const props = this.props;
+            const { id, index, selectable, onSelect, onUp, onTap } = this.props;
 
-            if (props.selectable) {
+            if (selectable) {
                 this.setState(prevState => {
                     const selected = !prevState.selected;
 
-                    if (props.onSelect) {
-                        props.onSelect({ selected, id: props.id, sender: this });
+                    if (onSelect) {
+                        onSelect({ selected, id, index, sender: this });
                     }
 
                     return { selected };
                 });
             }
 
-            if (props.onUp) {
-                props.onUp({ id: props.id, sender: this });
+            if (onUp) {
+                onUp({ id, index, sender: this });
             }
-            if (props.onTap) {
-                props.onTap({ id: props.id, sender: this });
+            if (onTap) {
+                onTap({ id, index, sender: this });
             }
         }
     }
