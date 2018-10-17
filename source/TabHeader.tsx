@@ -15,9 +15,7 @@ import DropTarget, { IPointerDragEvent } from "./DropTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface ITabHeaderContainerProps extends IComponentProps
-{
-}
+export interface ITabHeaderContainerProps extends IComponentProps { }
 
 export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps, {}>
 {
@@ -47,14 +45,18 @@ export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps
     }
 }
 
-export interface ITabHeaderSelectEvent extends IComponentEvent<TabHeaderItem> { id: string }
-export interface ITabHeaderCloseEvent extends IComponentEvent<TabHeaderItem> { id: string }
-export interface ITabHeaderDropEvent extends IComponentEvent<TabHeaderItem> { id: string, sourceTabId: string }
+export interface ITabHeaderSelectEvent extends IComponentEvent<TabHeaderItem> { }
 
+export interface ITabHeaderCloseEvent extends ITabHeaderSelectEvent { }
+
+export interface ITabHeaderDropEvent extends IComponentEvent<TabHeaderItem>
+{
+    sourceTabId: string;
+    sourceTabIndex: number;
+}
 
 export interface ITabHeaderItemProps extends IComponentProps
 {
-    id: string;
     text?: string;
     icon?: string;
     faIcon?: string;
@@ -69,7 +71,7 @@ export interface ITabHeaderItemProps extends IComponentProps
 
 export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
 {
-    static defaultProps: Partial<ITabHeaderItemProps> = {
+    static defaultProps = {
         className: "tab-header-item",
         active: false
     };
@@ -103,18 +105,7 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
 
     render()
     {
-        const {
-            id,
-            className,
-            style,
-            text,
-            icon,
-            faIcon,
-            title,
-            closable,
-            movable,
-            active
-        } = this.props;
+        const { id, index, className, style, text, icon, faIcon, title, closable, movable, active } = this.props;
 
         const classes = active ? className + " active" : className;
 
@@ -137,8 +128,9 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
 
             <DragSource
                 id={id}
+                index={index}
                 draggable={canDrag}
-                payload={id}
+                payload={{ id, index }}
                 payloadType={"flow/tab-header"}
                 onTap={this.onSelect}>
 
@@ -195,7 +187,13 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
         const { id, index, onDrop } = this.props;
 
         if (onDrop) {
-            onDrop({ sourceTabId: event.payload, id, index, sender: this });
+            onDrop({
+                sourceTabId: event.payload.id,
+                sourceTabIndex: event.payload.index,
+                id,
+                index,
+                sender: this
+            });
         }
     }
 

@@ -37,7 +37,7 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
         this.onDockableDrop = this.onDockableDrop.bind(this);
     }
 
-    protected getContentContainer(children: ReactElement<any>[])
+    protected renderContentContainer(children: ReactElement<any>[])
     {
         return (<DockTabContentContainer
             className="content"
@@ -51,7 +51,13 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
         const { id, index, onTabSelect } = this.props;
 
         if (onTabSelect) {
-            onTabSelect({ tabId: event.id, id, index, sender: this });
+            onTabSelect({
+                tabId: event.id,
+                tabIndex: event.index,
+                id,
+                index,
+                sender: this
+            });
         }
     }
 
@@ -62,7 +68,9 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
         if (onTabDrop) {
             onTabDrop({
                 sourceTabId: event.sourceTabId,
+                sourceTabIndex: event.sourceTabIndex,
                 tabId: this.state.activeTabId,
+                tabIndex: this.state.activeTabIndex,
                 dockArea: event.dockArea,
                 id,
                 index,

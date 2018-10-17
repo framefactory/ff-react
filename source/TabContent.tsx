@@ -9,16 +9,12 @@ import * as React from "react";
 import { CSSProperties } from "react";
 
 import FlexItem from "./FlexItem";
+import { IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[TabContentContainer]] component. */
-export interface ITabContentContainerProps
-{
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
-}
+export interface ITabContentContainerProps extends IComponentProps { }
 
 export class TabContentContainer extends React.Component<ITabContentContainerProps, {}>
 {
@@ -44,11 +40,8 @@ export class TabContentContainer extends React.Component<ITabContentContainerPro
 }
 
 /** Properties for [[TabContentItem]] component. */
-export interface ITabContentItemProps
+export interface ITabContentItemProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
     active?: boolean;
 }
 

@@ -19,6 +19,7 @@ import DockSprite, { DockArea } from "./DockSprite";
 export interface IDockTabContentDropEvent extends IComponentEvent<DockTabContentContainer>
 {
     sourceTabId: string;
+    sourceTabIndex: number;
     dockArea: DockArea;
 }
 
@@ -107,7 +108,8 @@ export class DockTabContentContainer
 
         if (state.dockArea !== "none" && onDrop) {
             this.props.onDrop({
-                sourceTabId: event.payload,
+                sourceTabId: event.payload.id,
+                sourceTabIndex: event.payload.index,
                 dockArea: state.dockArea,
                 id,
                 index,

@@ -30,7 +30,9 @@ import { IComponentEvent, IComponentProps } from "./common";
 export interface ITabItemProps
 {
     /** Unique identifier. */
-    id: string;
+    id?: string;
+    /** Unique numeric index. */
+    index?: number;
     /** Text displayed in the tab header. */
     text?: string;
     /** Icon displayed in the tab header, in front of the text. */
@@ -56,14 +58,25 @@ export const TabItem: React.SFC<ITabItemProps> = function(props)
     return React.createElement("", props, props.children);
 };
 
-export interface ITabSelectEvent extends IComponentEvent<TabContainer> { tabId: string; }
+export interface ITabSelectEvent extends IComponentEvent<TabContainer>
+{
+    tabId: string;
+    tabIndex: number;
+}
+
 export interface ITabCloseEvent extends ITabSelectEvent {}
-export interface ITabDropEvent extends ITabSelectEvent { sourceTabId: string }
+
+export interface ITabDropEvent extends ITabSelectEvent
+{
+    sourceTabId: string;
+    sourceTabIndex: number;
+}
 
 /** Properties for [[TabContainer]] component. */
 export interface ITabContainerProps extends IComponentProps
 {
     activeTabId?: string;
+    activeTabIndex?: number;
     onTabSelect?: (event: ITabSelectEvent) => void;
     onTabClose?: (event: ITabCloseEvent) => void;
     onTabDrop?: (event: ITabDropEvent) => void;
@@ -72,6 +85,7 @@ export interface ITabContainerProps extends IComponentProps
 interface ITabContainerState
 {
     activeTabId: string;
+    activeTabIndex: number;
 }
 
 export default class TabContainer<P extends ITabContainerProps = ITabContainerProps>
@@ -83,7 +97,10 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
 
     static getDerivedStateFromProps(props)
     {
-        return { activeTabId: props.activeTabId };
+        return {
+            activeTabId: props.activeTabId,
+            activeTabIndex: props.activeTabIndex
+        };
     }
 
     constructor(props: P)
@@ -95,11 +112,12 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         this.onDrop = this.onDrop.bind(this);
 
         this.state = {
-            activeTabId: props.activeTabId
+            activeTabId: props.activeTabId,
+            activeTabIndex: props.activeTabIndex
         };
     }
 
-    protected getHeaderContainer(children: ReactElement<any>[])
+    protected renderHeaderContainer(children: ReactElement<any>[])
     {
         return (<TabHeaderContainer
             className="header">
@@ -108,7 +126,7 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         </TabHeaderContainer>);
     }
 
-    protected getContentContainer(children: ReactElement<any>[])
+    protected renderContentContainer(children: ReactElement<any>[])
     {
         return (<TabContentContainer
             className="content">
@@ -117,18 +135,25 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         </TabContentContainer>);
     }
 
-    protected getHeaderItem(item: ReactElement<ITabItemProps>, isActive: boolean)
+    protected renderHeaderItem(item: ReactElement<ITabItemProps>, isActive: boolean)
     {
+        const { id, index, text, icon, faIcon, title, closable, movable } = item.props;
+
+        if (id === undefined && index === undefined) {
+            throw new Error("either id or index property must be provided");
+        }
+
         return (<TabHeaderItem
             className="header-item"
-            key={item.props.id}
-            id={item.props.id}
-            text={item.props.text}
-            icon={item.props.icon}
-            faIcon={item.props.faIcon}
-            title={item.props.title}
-            closable={item.props.closable}
-            movable={item.props.movable}
+            key={id || index}
+            id={id}
+            index={index}
+            text={text}
+            icon={icon}
+            faIcon={faIcon}
+            title={title}
+            closable={closable}
+            movable={movable}
             active={isActive}
             onSelect={this.onSelect}
             onClose={this.onClose}
@@ -136,11 +161,15 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         />);
     }
 
-    protected getContentItem(item: ReactElement<ITabItemProps>, isActive: boolean)
+    protected renderContentItem(item: ReactElement<ITabItemProps>, isActive: boolean)
     {
+        const { id, index } = item.props;
+
         return (<TabContentItem
             className="content-item"
-            key={item.props.id}
+            key={id || index}
+            id={id}
+            index={index}
             active={isActive}>
 
             {item.props["children"]}
@@ -149,26 +178,30 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
 
     render()
     {
-        const props = this.props;
-
         const {
             className,
             children
-        } = props;
+        } = this.props;
 
-        const activeTabId = this.state.activeTabId;
+        const {
+            activeTabId,
+            activeTabIndex
+        } = this.state;
+
 
         const childrenArray = Array.isArray(children) ? children : [ children ];
         const tabItems = childrenArray.filter((item: any) => item.type === TabItem);
 
         const headerItems = tabItems.map((item: ReactElement<ITabItemProps>) => {
-            const isActive = item.props.id === activeTabId;
-            return this.getHeaderItem(item, isActive);
+            const { id, index } = item.props;
+            const isActive = activeTabId ? id === activeTabId : index === activeTabIndex;
+            return this.renderHeaderItem(item, isActive);
         });
 
         const contentItems = tabItems.map((item: ReactElement<ITabItemProps>) => {
-            const isActive = item.props.id === activeTabId;
-            return this.getContentItem(item, isActive);
+            const { id, index } = item.props;
+            const isActive = activeTabId ? id === activeTabId : index === activeTabIndex;
+            return this.renderContentItem(item, isActive);
         });
 
         return (
@@ -177,8 +210,8 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
                 direction="vertical"
                 position="fill">
 
-                {this.getHeaderContainer(headerItems)}
-                {this.getContentContainer(contentItems)}
+                {this.renderHeaderContainer(headerItems)}
+                {this.renderContentContainer(contentItems)}
 
             </FlexContainer>
         );
@@ -186,12 +219,12 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
 
     protected onSelect(event: ITabHeaderSelectEvent)
     {
-        this.setState({ activeTabId: event.id });
+        this.setState({ activeTabId: event.id, activeTabIndex: event.index });
 
         const { id, index, onTabSelect } = this.props;
 
         if (onTabSelect) {
-            onTabSelect({ tabId: event.id, id, index, sender: this });
+            onTabSelect({ tabId: event.id, tabIndex: event.index, id, index, sender: this });
         }
     }
 
@@ -200,7 +233,7 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         const { id, index, onTabClose } = this.props;
 
         if (onTabClose) {
-            onTabClose({ tabId: event.id, id, index, sender: this });
+            onTabClose({ tabId: event.id, tabIndex: event.index, id, index, sender: this });
         }
     }
 
@@ -209,7 +242,15 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         const { id, index, onTabDrop } = this.props;
 
         if (onTabDrop) {
-            onTabDrop({ sourceTabId: event.sourceTabId, tabId: event.id, id, index, sender: this });
+            onTabDrop({
+                sourceTabId: event.sourceTabId,
+                sourceTabIndex: event.sourceTabIndex,
+                tabId: event.id,
+                tabIndex: event.index,
+                id,
+                index,
+                sender: this
+            });
         }
     }
 }
