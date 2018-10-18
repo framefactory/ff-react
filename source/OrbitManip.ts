@@ -71,6 +71,9 @@ export default class OrbitManip implements IManipEventHandler
         }
 
         if (this.phase === "active") {
+            if (this.deltaX === 0 && this.deltaY === 0 && this.deltaPinch === 1) {
+                return null;
+            }
             this.setDeltaOrbit();
             this.deltaX = 0;
             this.deltaY = 0;
