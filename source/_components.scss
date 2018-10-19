@@ -28,9 +28,9 @@ $color-text-disabled: #808080 !default;
 $color-icon: #a0a0a0 !default;
 $color-icon-disabled: #606060 !default;
 
-$color-focus: $color-primary-light;
-$focus-outline: 1px solid $color-focus !default;
-$focus-outline-offset: 1px !default;
+$color-focus: $color-secondary-light;
+$focus-outline: 0 solid $color-focus !default;
+$focus-outline-offset: 0 !default;
 
 ////////////////////////////////////////////////////////////////////////////////
 // HELPERS
@@ -45,6 +45,13 @@ $focus-outline-offset: 1px !default;
 
 .fullsize {
   @include full-size;
+}
+
+@mixin focus-frame {
+  &:focus {
+    outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
 }
 
 @keyframes spin {
@@ -139,11 +146,7 @@ $tx-medium: 0.3s;
 
 .control {
   display: inline-block;
-
-  &:focus {
-    outline: $focus-outline;
-    outline-offset: $focus-outline-offset;
-  }
+  @include focus-frame;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
