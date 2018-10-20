@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties, MouseEvent, KeyboardEvent } from "react";
+import { CSSProperties, PointerEvent, KeyboardEvent } from "react";
 
 import * as ReactDOM from "react-dom";
 import { IComponentEvent, IComponentProps } from "./common";
@@ -84,7 +84,7 @@ export default class Dialog extends React.Component<IDialogProps, {}>
         this.onRefAnchor = this.onRefAnchor.bind(this);
         this.onRefDialog = this.onRefDialog.bind(this);
         this.onRefModalPlane = this.onRefModalPlane.bind(this);
-        this.onModalPlaneClick = this.onModalPlaneClick.bind(this);
+        this.onModalPlaneDown = this.onModalPlaneDown.bind(this);
         this.onModalPlaneKeyPress = this.onModalPlaneKeyPress.bind(this);
         this.calculateLayout = this.calculateLayout.bind(this);
 
@@ -169,7 +169,7 @@ export default class Dialog extends React.Component<IDialogProps, {}>
                     ref={this.onRefModalPlane}
                     className={className + " modal"}
                     style={Dialog.modalStyle}
-                    onClick={this.onModalPlaneClick}
+                    onPointerDown={this.onModalPlaneDown}
                     onKeyUp={this.onModalPlaneKeyPress}>
                     {dialogFrame}
                 </div>
@@ -209,8 +209,10 @@ export default class Dialog extends React.Component<IDialogProps, {}>
         this.modalElement = element;
     }
 
-    protected onModalPlaneClick(event: MouseEvent<HTMLDivElement>)
+    protected onModalPlaneDown(event: PointerEvent<HTMLDivElement>)
     {
+        console.log("onModalPlaneDown");
+
         // if event is bubbling from dialog, do nothing
         if (event.target !== this.modalElement) {
             return;
