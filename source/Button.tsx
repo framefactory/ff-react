@@ -86,7 +86,7 @@ export type PointerEvent = PointerEvent<HTMLDivElement>;
 export default class Button<P extends IButtonProps = IButtonProps> extends React.Component<P, IButtonState>
 {
     static defaultProps: IButtonProps = {
-        className: "control button"
+        className: "ff-control ff-button"
     };
 
     static mainStyle: CSSProperties = {
@@ -154,8 +154,8 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
         } = this.props;
 
         const classes = className +
-            (this.state.selected ? " selected" : "") +
-            (disabled === true ? " disabled" : "");
+            (this.state.selected ? " ff-selected" : "") +
+            (disabled === true ? " ff-disabled" : "");
 
         const mainStyle = Object.assign({}, Button.mainStyle, style);
         const contentStyle = Button.contentStyle;
@@ -178,10 +178,10 @@ export default class Button<P extends IButtonProps = IButtonProps> extends React
             <div
                 {...props} >
 
-                {icon ? <span className={"content icon " + icon} style={contentStyle} /> : null}
-                {faIcon ? <span className={"content icon fa fas fa-" + faIcon} style={contentStyle} /> : null}
-                {image ? <img className="content image" src={image} style={contentStyle} /> : null}
-                {text ? <span className="content text" style={contentStyle}>{text}</span> : null}
+                {icon ? <span className={"ff-content ff-icon " + icon} style={contentStyle} /> : null}
+                {faIcon ? <span className={"ff-content ff-icon fa fas fa-" + faIcon} style={contentStyle} /> : null}
+                {image ? <img className="ff-content ff-image" src={image} style={contentStyle} /> : null}
+                {text ? <span className="ff-content ff-text" style={contentStyle}>{text}</span> : null}
                 {children}
             </div>);
     }

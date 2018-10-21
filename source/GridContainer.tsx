@@ -138,7 +138,7 @@ const GridContainer: React.SFC<IGridContainerProps> = function(props)
 };
 
 GridContainer.defaultProps = {
-    className: "grid-container"
+    className: "ff-grid-container"
 };
 
 export default GridContainer;

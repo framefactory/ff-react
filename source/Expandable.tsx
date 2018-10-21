@@ -23,7 +23,7 @@ export interface IExpandableHeaderProps extends IComponentProps
 export class ExpandableHeader extends React.Component<IExpandableHeaderProps, {}>
 {
     static defaultProps: IExpandableHeaderProps = {
-        className: "expandable-title"
+        className: "ff-expandable-header"
     };
 
     render()
@@ -89,7 +89,7 @@ export interface IExpandableProps
 export default class Expandable extends React.Component<IExpandableProps, {}>
 {
     static defaultProps: IExpandableProps = {
-        className: "expandable"
+        className: "ff-expandable"
     };
 
     private static style: CSSProperties = {

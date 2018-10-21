@@ -38,7 +38,7 @@ export class DockTabContentContainer
     extends React.Component<IDockTabContentContainerProps, IDockTabContentContainerState>
 {
     static readonly defaultProps: Partial<IDockTabContentContainerProps> = {
-        className: "dockable-tab-content-container"
+        className: "ff-dock-tab-content-container"
     };
 
     protected static readonly style: CSSProperties = {

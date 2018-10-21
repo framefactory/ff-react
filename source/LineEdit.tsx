@@ -30,7 +30,7 @@ export interface ILineEditProps extends IComponentProps
 export default class LineEdit extends React.Component<ILineEditProps, {}>
 {
     static defaultProps: ILineEditProps = {
-        className: "control line-edit"
+        className: "ff-control ff-line-edit"
     };
 
     protected element: HTMLInputElement;

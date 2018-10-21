@@ -26,7 +26,7 @@ export interface IDockTabContainerProps extends ITabContainerProps
 export default class DockTabContainer extends TabContainer<IDockTabContainerProps>
 {
     static readonly defaultProps: Partial<IDockTabContainerProps> = {
-        className: "dockable-tab-container"
+        className: "ff-dock-tab-container"
     };
 
     constructor(props: IDockTabContainerProps)
@@ -40,7 +40,7 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
     protected renderContentContainer(children: ReactElement<any>[])
     {
         return (<DockTabContentContainer
-            className="content"
+            className="ff-content"
             onDrop={this.onDockableDrop}>
             {children}
         </DockTabContentContainer>);

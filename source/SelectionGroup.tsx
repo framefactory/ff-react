@@ -41,7 +41,7 @@ export interface ISelectionGroupState
 export default class SelectionGroup extends React.Component<ISelectionGroupProps, ISelectionGroupState>
 {
     static defaultProps: ISelectionGroupProps = {
-        className: "selection-group",
+        className: "ff-selection-group",
         mode: "radio",
         shape: "circle"
     };

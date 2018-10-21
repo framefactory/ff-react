@@ -37,7 +37,7 @@ export interface CheckboxProps extends IButtonProps
 export default class Checkbox extends Button<CheckboxProps>
 {
     static defaultProps: CheckboxProps = {
-        className: "control checkbox",
+        className: "ff-control ff-checkbox",
         selectable: true,
         shape: "square"
     };
@@ -108,9 +108,9 @@ export default class Checkbox extends Button<CheckboxProps>
             children
         } = this.props as any;
 
-        const selectedClass = this.state.selected ? " selected" : "";
+        const selectedClass = this.state.selected ? " ff-selected" : "";
         const checkboxClasses = className + " " + shape + selectedClass;
-        const frameClasses = "frame" + selectedClass;
+        const frameClasses = "ff-frame" + selectedClass;
         const labelStyle = Object.assign({}, Checkbox.labelStyle, style);
         const frameStyle = shape === "square" ? Checkbox.squareFrameStyle : Checkbox.circleFrameStyle;
         const markStyle = shape === "square" ? Checkbox.squareMarkStyle : Checkbox.circleMarkStyle;
@@ -125,20 +125,20 @@ export default class Checkbox extends Button<CheckboxProps>
             onPointerDown: this.onPointerDown,
             onPointerUp: this.onPointerUp,
             onPointerCancel: this.onPointerCancel,
-            onKeyPress: this.onKeyUp
+            onKeyUp: this.onKeyUp
         };
 
         return (
             <div
                 {...props} >
 
-                {icon ? <span className={"content icon " + icon} style={contentStyle} /> : null}
-                {faIcon ? <span className={"content icon fa fa-" + faIcon} style={contentStyle} /> : null}
-                {image ? <img className="content image" src={image} style={contentStyle} /> : null}
-                {text ? <span className="content text" style={contentStyle}>{text}</span> : null}
+                {icon ? <span className={"ff-content ff-icon " + icon} style={contentStyle} /> : null}
+                {faIcon ? <span className={"ff-content ff-icon fa fa-" + faIcon} style={contentStyle} /> : null}
+                {image ? <img className="ff-content ff-image" src={image} style={contentStyle} /> : null}
+                {text ? <span className="ff-content ff-text" style={contentStyle}>{text}</span> : null}
                 {children}
                 <div className={frameClasses} style={frameStyle} />
-                {this.state.selected ? <div className="mark" style={markStyle} /> : null}
+                {this.state.selected ? <div className="ff-mark" style={markStyle} /> : null}
             </div>);
     }
 }

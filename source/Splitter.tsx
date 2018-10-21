@@ -36,7 +36,7 @@ export interface ISplitterSectionProps
 export class SplitterSection extends React.Component<ISplitterSectionProps, any>
 {
     static defaultProps: Partial<ISplitterSectionProps> = {
-        className: "splitter-section",
+        className: "ff-splitter-section",
     };
 
     protected static sectionStyle: CSSProperties = {
@@ -103,7 +103,7 @@ export interface ISplitterContainerProps
 export class SplitterContainer extends React.Component<ISplitterContainerProps, {}>
 {
     static defaultProps: ISplitterContainerProps = {
-        className: "splitter-container",
+        className: "ff-splitter-container",
         direction: "horizontal",
         margin: 20
     };
@@ -235,17 +235,19 @@ export class SplitterContainer extends React.Component<ISplitterContainerProps, 
 
                 // if no key is provided, add one
                 const key = sections[i].key || i;
+                const className = sections[i].props.className
+                    + (this.isVertical ? " ff-vertical" : " ff-horizontal");
 
                 // add splitter section
                 components.push(
-                    React.cloneElement(sections[i], { key: "s" + key, size })
+                    React.cloneElement(sections[i], { key: "s" + key, size, className })
                 );
 
                 // insert a splitter handle between sections
                 if (i < sectionCount - 1) {
                     components.push(<Draggable
                         key={ "d" + key }
-                        className="splitter-handle"
+                        className="ff-splitter-handle"
                         style={handleStyle}
                         onDragBegin={this.onDragBegin}
                         onDragMove={this.onDragMove}

@@ -33,7 +33,7 @@ export interface ISliderState
 export default class Slider extends React.Component<ISliderProps, ISliderState> implements IManipListener
 {
     static defaultProps: ISliderProps = {
-        className: "slider",
+        className: "ff-slider",
         value: 0,
         min: 0,
         max: 100
@@ -88,7 +88,7 @@ export default class Slider extends React.Component<ISliderProps, ISliderState> 
             className={this.props.className}>
             <div
                 ref={this.onRefKnob}
-                className="knob"
+                className="ff-knob"
                 style={this.knobStyle}>
             </div>
         </div>);

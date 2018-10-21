@@ -50,7 +50,7 @@ export interface IDialogProps extends IComponentProps
 export default class Dialog extends React.Component<IDialogProps, {}>
 {
     static readonly defaultProps: IDialogProps = {
-        className: "dialog"
+        className: "ff-dialog"
     };
 
     protected static readonly style: CSSProperties = {
@@ -167,7 +167,7 @@ export default class Dialog extends React.Component<IDialogProps, {}>
             dialog = modal ? (
                 <div
                     ref={this.onRefModalPlane}
-                    className={className + " modal"}
+                    className={className + " ff-modal"}
                     style={Dialog.modalStyle}
                     onPointerDown={this.onModalPlaneDown}
                     onKeyUp={this.onModalPlaneKeyPress}>
@@ -211,8 +211,6 @@ export default class Dialog extends React.Component<IDialogProps, {}>
 
     protected onModalPlaneDown(event: PointerEvent<HTMLDivElement>)
     {
-        console.log("onModalPlaneDown");
-
         // if event is bubbling from dialog, do nothing
         if (event.target !== this.modalElement) {
             return;

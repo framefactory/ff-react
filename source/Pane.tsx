@@ -14,7 +14,7 @@ export default class Pane extends React.Component<any, any>
 {
     render()
     {
-        return (<div className="pane" style={Pane.style} {...this.props}>
+        return (<div className="ff-pane" style={Pane.style} {...this.props}>
         </div>);
     }
 

@@ -19,7 +19,7 @@ export interface ITabContentContainerProps extends IComponentProps { }
 export class TabContentContainer extends React.Component<ITabContentContainerProps, {}>
 {
     static defaultProps: ITabContentContainerProps = {
-        className: "tab-content-container"
+        className: "ff-tab-content-container"
     };
 
     render()
@@ -48,7 +48,7 @@ export interface ITabContentItemProps extends IComponentProps
 export class TabContentItem extends React.Component<ITabContentItemProps, {}>
 {
     static readonly defaultProps: Partial<ITabContentItemProps> = {
-        className: "tab-content-item"
+        className: "ff-tab-content-item"
     };
 
     protected static readonly style: CSSProperties = {

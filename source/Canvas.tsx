@@ -51,7 +51,7 @@ export interface ICanvasProps extends IComponentProps
 export default class Canvas extends React.Component<ICanvasProps, {}>
 {
     static readonly defaultProps: Partial<ICanvasProps> = {
-        className: "canvas"
+        className: "ff-canvas"
     };
 
     protected static readonly style: CSSProperties = {

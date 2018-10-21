@@ -40,7 +40,7 @@ export interface IPopupButtonState
 export default class PopupButton extends React.Component<IPopupButtonProps, IPopupButtonState>
 {
     static readonly defaultProps: IPopupButtonProps = {
-        className: "popup-button"
+        className: "ff-popup-button"
     };
 
     protected dialog: Dialog;

@@ -82,7 +82,7 @@ const GridItem: React.SFC<IGridItemProps> = function(props)
 };
 
 GridItem.defaultProps = {
-    className: "grid-item"
+    className: "ff-grid-item"
 };
 
 export default GridItem;

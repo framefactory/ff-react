@@ -48,7 +48,7 @@ export interface IPropertyFieldState
 export default class PropertyField extends React.Component<IPropertyFieldProps, IPropertyFieldState>
 {
     static defaultProps: IPropertyFieldProps = {
-        className: "control property-field"
+        className: "ff-control ff-property-field"
     };
 
     static textStyle: CSSProperties = {
@@ -133,7 +133,7 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
             isEditing
         } = this.state;
 
-        const classes = className + (isDragging ? " dragging" : "");
+        const classes = className + (isDragging ? " ff-dragging" : "");
 
         const textStyle = PropertyField.textStyle;
 
@@ -150,10 +150,10 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
                 onDragBegin={this.onDragBegin}
                 onDragMove={this.onDragMove}
                 onDragEnd={this.onDragEnd}>
-                {format.bar ? <div className="bar" style={barStyle}/> : null}
-                <label className="text align-right" style={textStyle}>{this.getFormattedValue()}</label>
+                {format.bar ? <div className="ff-bar" style={barStyle}/> : null}
+                <label className="ff-text ff-align-right" style={textStyle}>{this.getFormattedValue()}</label>
                 {isEditing ? <form><input
-                    className="edit align-right"
+                    className="ff-edit ff-align-right"
                     type="text"
                     defaultValue={this.getFormattedValue()}
                     ref={el => this.setInputRef(el)}

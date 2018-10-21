@@ -63,7 +63,7 @@ const FlexItem: React.SFC<IFlexItemProps> = function(props)
 };
 
 FlexItem.defaultProps = {
-    className: "flex-content",
+    className: "ff-flex-item",
     grow: 1,
     shrink: 1,
     basis: "auto"

@@ -72,7 +72,7 @@ export interface IManipProps extends IComponentProps
 export default class Manip extends React.Component<IManipProps, {}>
 {
     static defaultProps = {
-        className: "manip"
+        className: "ff-manip"
     };
 
     protected element: React.RefObject<HTMLDivElement>;

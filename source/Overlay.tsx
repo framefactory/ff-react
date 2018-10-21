@@ -23,7 +23,7 @@ export interface IOverlayProps extends IComponentProps
 export default class Overlay extends React.Component<IOverlayProps, {}>
 {
     static defaultProps: Partial<IOverlayProps> = {
-        className: "overlay",
+        className: "ff-overlay",
         zIndex: 1000
     };
 

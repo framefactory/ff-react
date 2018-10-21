@@ -31,7 +31,7 @@ export interface IFileDropTargetState
 export default class FileDropTarget extends React.Component<IFileDropTargetProps, IFileDropTargetState>
 {
     static defaultProps: IFileDropTargetProps = {
-        className: "file-drop-target"
+        className: "ff-file-drop-target"
     };
 
     static isSupported: boolean = _fileDropSupported;
@@ -58,7 +58,7 @@ export default class FileDropTarget extends React.Component<IFileDropTargetProps
             children
         } = this.props;
 
-        const classNames = className + (this.state.isDragging ? " targeted": "");
+        const classNames = className + (this.state.isDragging ? " ff-targeted": "");
 
         if (!_fileDropSupported) {
             return (<div

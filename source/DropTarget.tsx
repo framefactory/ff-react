@@ -29,7 +29,7 @@ export interface IDropTargetProps extends IComponentProps
 export default class DropTarget extends React.Component<IDropTargetProps, any>
 {
     static defaultProps: IDropTargetProps = {
-        className: "drop-target",
+        className: "ff-drop-target",
         payloadTypes: []
     };
 
@@ -133,19 +133,19 @@ export default class DropTarget extends React.Component<IDropTargetProps, any>
 
     private addListeners(target: HTMLElement)
     {
-        target.addEventListener("react-dragprobe", this.onDragProbe);
-        target.addEventListener("react-dragenter", this.onDragEnter);
-        target.addEventListener("react-dragupdate", this.onDragUpdate);
-        target.addEventListener("react-dragleave", this.onDragLeave);
-        target.addEventListener("react-drop", this.onDrop);
+        target.addEventListener("ff-dragprobe", this.onDragProbe);
+        target.addEventListener("ff-dragenter", this.onDragEnter);
+        target.addEventListener("ff-dragupdate", this.onDragUpdate);
+        target.addEventListener("ff-dragleave", this.onDragLeave);
+        target.addEventListener("ff-drop", this.onDrop);
     }
 
     private removeListeners(target: HTMLElement)
     {
-        target.removeEventListener("react-dragprobe", this.onDragProbe);
-        target.removeEventListener("react-dragenter", this.onDragEnter);
-        target.removeEventListener("react-dragupdate", this.onDragUpdate);
-        target.removeEventListener("react-dragleave", this.onDragLeave);
-        target.removeEventListener("react-drop", this.onDrop);
+        target.removeEventListener("ff-dragprobe", this.onDragProbe);
+        target.removeEventListener("ff-dragenter", this.onDragEnter);
+        target.removeEventListener("ff-dragupdate", this.onDragUpdate);
+        target.removeEventListener("ff-dragleave", this.onDragLeave);
+        target.removeEventListener("ff-drop", this.onDrop);
     }
 }

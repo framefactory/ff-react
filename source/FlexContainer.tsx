@@ -64,7 +64,7 @@ const FlexContainer: React.SFC<IFlexContainerProps> = function(props)
         children
     } = props;
 
-    const classes = className + " " + direction;
+    const classes = className + " ff-" + direction;
 
     const styles = Object.assign({}, _defaultStyle, style);
 
@@ -110,7 +110,7 @@ const FlexContainer: React.SFC<IFlexContainerProps> = function(props)
 };
 
 FlexContainer.defaultProps = {
-    className: "flex-layout",
+    className: "ff-flex-container",
     direction: "horizontal",
     position: "relative",
     grow: 1,

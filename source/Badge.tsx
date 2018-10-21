@@ -44,16 +44,16 @@ const Badge: React.SFC<IBadgeProps> = function(props)
     }
 
     if (error || type === "error") {
-        className += " error";
+        className += " ff-error";
     }
     else if (warning || type === "warning") {
-        className += " warning";
+        className += " ff-warning";
     }
     else if (update || type === "update") {
-        className += " update";
+        className += " ff-update";
     }
     else if (info || type === "info") {
-        className += " info";
+        className += " ff-info";
     }
     else if (type) {
         className += " " + type;
@@ -68,7 +68,7 @@ const Badge: React.SFC<IBadgeProps> = function(props)
 };
 
 Badge.defaultProps = {
-    className: "badge"
+    className: "ff-badge"
 };
 
 export default Badge;

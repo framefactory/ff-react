@@ -33,7 +33,7 @@ export interface IDockViewProps
 export default class DockView extends React.Component<IDockViewProps, {}>
 {
     static defaultProps: Partial<IDockViewProps> = {
-        className: "dockable-view",
+        className: "ff-dock-view",
     };
 
     protected readonly actions: DockActions;
@@ -133,7 +133,7 @@ export default class DockView extends React.Component<IDockViewProps, {}>
             </div>);
         }
         else {
-            console.warn("DockableView.render - missing layout");
+            console.warn("DockView.render - missing layout");
             return null;
         }
     }

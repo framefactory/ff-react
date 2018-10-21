@@ -20,7 +20,7 @@ export interface ITabHeaderContainerProps extends IComponentProps { }
 export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps, {}>
 {
     static readonly defaultProps: Partial<ITabHeaderContainerProps> = {
-        className: "tab-header-container"
+        className: "ff-tab-header-container"
     };
 
     protected static readonly style: CSSProperties = {
@@ -72,7 +72,7 @@ export interface ITabHeaderItemProps extends IComponentProps
 export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
 {
     static defaultProps = {
-        className: "tab-header-item",
+        className: "ff-tab-header-item",
         active: false
     };
 
@@ -107,7 +107,7 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
     {
         const { id, index, className, style, text, icon, faIcon, title, closable, movable, active } = this.props;
 
-        const classes = active ? className + " active" : className;
+        const classes = active ? className + " ff-active" : className;
 
         const styles = Object.assign({}, TabHeaderItem.style, style);
         const contentStyle = TabHeaderItem.contentStyle;
@@ -134,20 +134,20 @@ export class TabHeaderItem extends React.Component<ITabHeaderItemProps, {}>
                 payloadType={"flow/tab-header"}
                 onTap={this.onSelect}>
 
-                    {icon ? <span className={"content icon " + icon} style={contentStyle} /> : null}
-                    {faIcon ? <span className={"content icon fa fas fa-" + faIcon} style={contentStyle} /> : null}
-                    {text ? <span className="content text" style={contentStyle}>{text}</span> : null}
+                    {icon ? <span className={"ff-content ff-icon " + icon} style={contentStyle} /> : null}
+                    {faIcon ? <span className={"ff-content ff-icon fa fas fa-" + faIcon} style={contentStyle} /> : null}
+                    {text ? <span className="ff-content ff-text" style={contentStyle}>{text}</span> : null}
 
                 {hasCloseButton ?
                     <Button
-                        className="content button"
+                        className="ff-content ff-button"
                         id={id}
                         style={buttonStyle}
                         faIcon="times"
                         onTap={this.onClose} /> : null}
                 {hasMoveGrip &&! hasCloseButton ?
                     <Button
-                        className="content button"
+                        className="ff-content ff-button"
                         id={id}
                         style={buttonStyle}
                         disabled={true}

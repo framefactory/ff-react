@@ -43,7 +43,7 @@ const FlexSpacer: React.SFC<IFlexSpacerProps> = function(props)
 };
 
 FlexSpacer.defaultProps = {
-    className: "flex-spacer",
+    className: "ff-flex-spacer",
     grow: 1,
     shrink: 0,
     basis: "auto"

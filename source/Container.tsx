@@ -24,7 +24,7 @@ export interface IContainerProps
 export default class Container extends React.Component<IContainerProps, {}>
 {
     static readonly defaultProps: IContainerProps = {
-        className: "container"
+        className: "ff-container"
     };
 
     public onRenderContent?: () => ReactNode = null;

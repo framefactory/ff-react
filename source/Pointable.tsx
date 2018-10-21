@@ -32,7 +32,7 @@ export interface IPointableProps extends IComponentProps
 export default class Pointable<P = IPointableProps, S = {}> extends React.Component<P, S>
 {
     protected static defaultProps = {
-        className: "pointable"
+        className: "ff-pointable"
     };
 
     protected element: HTMLDivElement;

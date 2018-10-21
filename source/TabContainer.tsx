@@ -92,7 +92,7 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
     extends React.Component<ITabContainerProps, ITabContainerState>
 {
     static readonly defaultProps: Partial<ITabContainerProps> = {
-        className: "tab-container",
+        className: "ff-tab-container",
     };
 
     static getDerivedStateFromProps(props)
@@ -119,18 +119,14 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
 
     protected renderHeaderContainer(children: ReactElement<any>[])
     {
-        return (<TabHeaderContainer
-            className="header">
-
+        return (<TabHeaderContainer>
             {children}
         </TabHeaderContainer>);
     }
 
     protected renderContentContainer(children: ReactElement<any>[])
     {
-        return (<TabContentContainer
-            className="content">
-
+        return (<TabContentContainer>
             {children}
         </TabContentContainer>);
     }
@@ -144,7 +140,6 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         }
 
         return (<TabHeaderItem
-            className="header-item"
             key={id || index}
             id={id}
             index={index}
@@ -166,7 +161,6 @@ export default class TabContainer<P extends ITabContainerProps = ITabContainerPr
         const { id, index } = item.props;
 
         return (<TabContentItem
-            className="content-item"
             key={id || index}
             id={id}
             index={index}

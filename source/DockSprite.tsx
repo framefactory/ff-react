@@ -24,7 +24,7 @@ export interface IDockSpriteProps
 export default class DockSprite extends React.Component<IDockSpriteProps, any>
 {
     static readonly defaultProps: Partial<IDockSpriteProps> = {
-        className: "dockable-sprite",
+        className: "ff-dock-sprite",
     };
 
     private static style: CSSProperties = {

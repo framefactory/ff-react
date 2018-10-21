@@ -29,7 +29,7 @@ export interface IDropdownProps extends IComponentProps
 export default class Dropdown extends React.Component<IDropdownProps, {}>
 {
     static defaultProps: IDropdownProps = {
-        className: "control dropdown",
+        className: "ff-control ff-dropdown",
         options: []
     };
 

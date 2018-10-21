@@ -18,7 +18,7 @@ export interface IExpandableGroupProps extends IComponentProps
 export default class ExpandableGroup extends React.Component<IExpandableGroupProps, any>
 {
     static defaultProps: IExpandableGroupProps = {
-        className: "ExpandableGroup"
+        className: "ff-expandable-group"
     };
 
     constructor(props: IExpandableGroupProps)

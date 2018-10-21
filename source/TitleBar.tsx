@@ -13,6 +13,7 @@ import { CSSProperties } from "react";
 /** Properties for [[TitleBar]] component. */
 export interface ITitleBarProps
 {
+    className?: string;
     text?: string;
 }
 
@@ -24,11 +25,18 @@ export default class TitleBar extends React.Component<ITitleBarProps, any>
     }
 
     static defaultProps: ITitleBarProps = {
+        className: "ff-title-bar",
         text: "Title Bar"
     };
 
     render()
     {
+        const {
+            className,
+            text,
+            children,
+        } = this.props;
+
         let barStyle: CSSProperties = {
         };
 
@@ -44,9 +52,9 @@ export default class TitleBar extends React.Component<ITitleBarProps, any>
             overflow: "hidden"
         };
 
-        return (<div className="title-bar" style={barStyle}>
-            <div className="buttons" style={buttonsStyle}>{this.props.children}</div>
-            <div className="text" style={textStyle}>{this.props.text}</div>
+        return (<div className={className} style={barStyle}>
+            <div className="ff-buttons" style={buttonsStyle}>{this.props.children}</div>
+            <div className="ff-text" style={textStyle}>{this.props.text}</div>
         </div>);
     }
 }

@@ -30,16 +30,16 @@ const BusyBox: React.SFC<IBusyBoxProps> = function(props)
         className={className}
         style={style}>
 
-        <div className="wheel fa fas fa-spinner" />
+        <div className="ff-wheel fa fas fa-spinner" />
 
-        <div className="text">
+        <div className="ff-text">
             {text}
         </div>
     </div>);
 };
 
 BusyBox.defaultProps = {
-    className: "busy-box"
+    className: "ff-busy-box"
 };
 
 export default BusyBox;

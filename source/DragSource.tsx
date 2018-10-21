@@ -68,7 +68,7 @@ export interface IDragSourceProps extends IDraggableProps
 export default class DragSource extends Draggable<IDragSourceProps>
 {
     protected static defaultProps = {
-        className: "drag-source",
+        className: "ff-drag-source",
         payloadType: "",
         payload: undefined
     };
@@ -163,7 +163,7 @@ export default class DragSource extends Draggable<IDragSourceProps>
     protected onDragEnd(event: PointerEvent)
     {
         if (this.dropTarget) {
-            let dropEvent = new CustomEvent("react-drop", {
+            let dropEvent = new CustomEvent("ff-drop", {
                 detail: this.createPointerDragEvent(event)
             });
             this.dropTarget.dispatchEvent(dropEvent);
@@ -214,7 +214,7 @@ export default class DragSource extends Draggable<IDragSourceProps>
                 const dragEvent = this.createPointerDragEvent(event);
                 dragEvent.dropTarget = null;
 
-                const probeEvent = new CustomEvent("react-dragprobe", {
+                const probeEvent = new CustomEvent("ff-dragprobe", {
                     detail: dragEvent,
                     bubbles: true
                 });
@@ -226,7 +226,7 @@ export default class DragSource extends Draggable<IDragSourceProps>
                 targetChanged = true;
 
                 if (this.dropTarget) {
-                    const leaveEvent = new CustomEvent("react-dragleave", {
+                    const leaveEvent = new CustomEvent("ff-dragleave", {
                         detail: this.createPointerDragEvent(event)
                     });
                     this.dropTarget.dispatchEvent(leaveEvent);
@@ -235,7 +235,7 @@ export default class DragSource extends Draggable<IDragSourceProps>
                 this.dropTarget = dropTarget;
 
                 if (this.dropTarget) {
-                    const enterEvent = new CustomEvent("react-dragenter", {
+                    const enterEvent = new CustomEvent("ff-dragenter", {
                         detail: this.createPointerDragEvent(event)
                     });
                     this.dropTarget.dispatchEvent(enterEvent);
@@ -244,7 +244,7 @@ export default class DragSource extends Draggable<IDragSourceProps>
         }
 
         if (!targetChanged && this.dropTarget) {
-            const updateEvent = new CustomEvent("react-dragupdate", {
+            const updateEvent = new CustomEvent("ff-dragupdate", {
                 detail: this.createPointerDragEvent(event)
             });
             this.dropTarget.dispatchEvent(updateEvent);

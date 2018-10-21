@@ -43,7 +43,7 @@ const Label: React.SFC<ILabelProps> = function(props)
 };
 
 Label.defaultProps = {
-    className: "control label"
+    className: "ff-control ff-label"
 };
 
 export default Label;

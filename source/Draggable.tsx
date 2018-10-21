@@ -52,7 +52,7 @@ export default class Draggable<P extends IDraggableProps = IDraggableProps>
     extends React.Component<P, IDraggableState>
 {
     protected static defaultProps = {
-        className: "draggable"
+        className: "ff-draggable"
     };
 
     protected element: React.RefObject<HTMLDivElement>;

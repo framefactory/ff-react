@@ -43,7 +43,7 @@ interface ITreeNodeEntry<T>
 export default class Tree<T = ITreeNode> extends React.Component<ITreeProps<T>, {}>
 {
     static readonly defaultProps: Partial<ITreeProps<any>> = {
-        className: "tree",
+        className: "ff-tree",
         includeRoot: true,
         getId: node => node.id,
         getClass: node => "",
@@ -87,16 +87,16 @@ export default class Tree<T = ITreeNode> extends React.Component<ITreeProps<T>, 
         const children = getChildren(node);
         const isExpanded = expanded && expanded[id];
         const isSelected = selected && selected[id];
-        const modeClass = children.length > 0 ? (isExpanded ? "expanded" : "collapsed") : "leaf";
+        const modeClass = children.length > 0 ? (isExpanded ? "ff-expanded" : "ff-collapsed") : "ff-leaf";
         const c = getClass(node);
-        const classes = "content " + modeClass + (isSelected ? " selected" : "") + (c ? " " + c : "");
+        const classes = "ff-content " + modeClass + (isSelected ? " ff-selected" : "") + (c ? " " + c : "");
 
-        const renderedChildren = isExpanded ? <div className="children">
+        const renderedChildren = isExpanded ? <div className="ff-children">
             {children.map(child => this.renderNode(child))}
         </div> : null;
 
         return(
-            <div className="node" key={id}>
+            <div className="ff-node" key={id}>
                 <div className={classes}>
                     {renderHeader(node)}
                     {renderedChildren}

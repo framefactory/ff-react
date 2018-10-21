@@ -36,7 +36,7 @@ export interface IDialProps
 export default class Dial extends React.Component<IDialProps, any>
 {
     protected static defaultProps: IDialProps = {
-        className: "dial",
+        className: "ff-dial",
         size: "200px",
         thickness: "25%",
         ghost: false,
@@ -154,14 +154,14 @@ export default class Dial extends React.Component<IDialProps, any>
                     height={props.size} />
 
                 <label
-                    className="label"
+                    className="ff-label"
                     style={labelStyle}>
 
                     {text}
                 </label>
                 <div
                     ref={this.onRefWheel}
-                    className="wheel"
+                    className="ff-wheel"
                     style={{display: "none"}} />
             </Draggable>
         </div>);
