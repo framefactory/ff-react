@@ -247,13 +247,17 @@ $tx-medium: 0.3s;
 ////////////////////////////////////////////////////////////////////////////////
 // LINE-EDIT, TEXT-EDIT
 
-.ff-line-edit {
+.ff-line-edit, .ff-text-edit {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 0.2em;
+  padding: 0 0.1em;
   border: none;
   outline: none;
   font: inherit;
+}
+
+.ff-text-edit {
+  resize: none;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

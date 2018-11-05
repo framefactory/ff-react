@@ -6,23 +6,22 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
 
-import { IComponentEvent } from "./common";
+import { IComponentEvent, IComponentProps } from "./common";
 import Button, { IButtonTapEvent } from "./Button";
 import Checkbox from "./Checkbox";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface ISelectionGroupSelectEvent extends IComponentEvent<SelectionGroup> { index: number }
+export interface ISelectionGroupSelectEvent extends IComponentEvent<SelectionGroup>
+{
+    selectionId: string;
+    selectionIndex: number;
+}
 
 /** Properties for [[SelectionGroup]] component */
-export interface ISelectionGroupProps
+export interface ISelectionGroupProps extends IComponentProps
 {
-    id?: string;
-    className?: string;
-    style?: CSSProperties;
-
     mode?: "radio" | "exclusive",
     selectionIndex?: number;
     shape?: "square" | "circle";
@@ -58,14 +57,16 @@ export default class SelectionGroup extends React.Component<ISelectionGroupProps
         };
     }
 
-    setSelected(index: number)
+    setSelected(selectionIndex: number, selectionId: string)
     {
         this.setState({
-            selectionIndex: index
+            selectionIndex
         });
 
+        const { id, index } = this.props;
+
         if (this.props.onSelect) {
-            this.props.onSelect({ index, id: this.props.id, sender: this });
+            this.props.onSelect({ selectionIndex, selectionId, id, index, sender: this });
         }
     }
 
@@ -79,16 +80,20 @@ export default class SelectionGroup extends React.Component<ISelectionGroupProps
         } = this.props;
 
         const selectionIndex = this.state.selectionIndex;
-        let index = 0;
+        let i = 0;
 
-        const transformedChildren = React.Children.map(children as any, child => {
-            const type = (child as any).type;
+        const transformedChildren = React.Children.map(children as any, (child: any) => {
+            const type = child.type;
+
             if (type === Button || type === Checkbox) {
-                return React.cloneElement(child as any, {
+                const index = child.props.index !== undefined ? child.props.index : i;
+                i = index + 1;
+
+                return React.cloneElement(child, {
                     selected: (index === selectionIndex),
                     selectable: false, // stateless Button, SelectionGroup controls selection state
                     shape,
-                    id: (index++).toString(),
+                    index,
                     onTap: this.onButtonTap
                 });
             }
@@ -103,15 +108,13 @@ export default class SelectionGroup extends React.Component<ISelectionGroupProps
         </div>);
     }
 
-    protected onButtonTap(args: IButtonTapEvent)
+    protected onButtonTap(event: IButtonTapEvent)
     {
-        const index = parseInt(args.id);
-
-        if (this.state.selectionIndex === index && this.props.mode === "exclusive") {
-            this.setSelected(-1);
+        if (this.state.selectionIndex === event.index && this.props.mode === "exclusive") {
+            this.setSelected(-1, "");
         }
         else {
-            this.setSelected(index);
+            this.setSelected(event.index, event.id);
         }
     }
 }

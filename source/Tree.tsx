@@ -32,14 +32,6 @@ export interface ITreeProps<T>
     renderHeader?: (node: T) => ReactNode
 }
 
-interface ITreeNodeEntry<T>
-{
-    id: string;
-    data: T;
-    expanded: boolean;
-    children: ITreeNodeEntry<T>[];
-}
-
 export default class Tree<T = ITreeNode> extends React.Component<ITreeProps<T>, {}>
 {
     static readonly defaultProps: Partial<ITreeProps<any>> = {
