@@ -63,6 +63,7 @@ export default class PopupButton extends React.Component<IPopupButtonProps, IPop
     render()
     {
         const props = this.props;
+        const popupVisible = this.state.popupVisible;
 
         return (
             <Dialog
@@ -73,7 +74,7 @@ export default class PopupButton extends React.Component<IPopupButtonProps, IPop
                 align={props.align}
                 portal={props.portal}
                 modal={props.modal}
-                visible={this.state.popupVisible}
+                visible={popupVisible}
                 onTapModal={this.onTapModal}>
 
                 <Anchor>
@@ -85,6 +86,7 @@ export default class PopupButton extends React.Component<IPopupButtonProps, IPop
                         faIcon={props.faIcon}
                         image={props.image}
                         title={props.title}
+                        selected={popupVisible}
                         disabled={props.disabled}
                         onTap={this.onTapButton} />
                 </Anchor>
