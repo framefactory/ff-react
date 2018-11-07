@@ -61,7 +61,8 @@ export default class Dialog extends React.Component<IDialogProps, {}>
     protected static readonly modalStyle: CSSProperties = {
         position: "absolute",
         top: 0, left: 0, right: 0, bottom: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        touchAction: "none"
     };
 
     /** div container for the dialog component. */
@@ -154,26 +155,20 @@ export default class Dialog extends React.Component<IDialogProps, {}>
 
         let dialog = null;
         if (visible) {
-            const dialogFrame = (
-                <div
-                    ref={this.onRefDialog}
-                    className={className}
-                    style={styles}>
+            const dialogFrame = React.createElement("div", {
+                ref: this.onRefDialog,
+                className,
+                style: styles
+            }, dialogChildren);
 
-                    {dialogChildren}
-                </div>
-            );
-
-            dialog = modal ? (
-                <div
-                    ref={this.onRefModalPlane}
-                    className={className + " ff-modal"}
-                    style={Dialog.modalStyle}
-                    onPointerDown={this.onModalPlaneDown}
-                    onKeyUp={this.onModalPlaneKeyPress}>
-                    {dialogFrame}
-                </div>
-            ) : dialogFrame;
+            dialog = modal ? React.createElement("div", {
+                ref: this.onRefModalPlane,
+                className: className + "ff-modal",
+                style: Dialog.modalStyle,
+                "touch-action": "none",
+                onPointerDown: this.onModalPlaneDown,
+                onKeyUp: this.onModalPlaneKeyPress
+            }, dialogFrame) : dialogFrame;
         }
 
         const dialogPortal = visible ? ReactDOM.createPortal(dialog, this.parentElement) : null;
@@ -222,6 +217,8 @@ export default class Dialog extends React.Component<IDialogProps, {}>
         if (onTapModal) {
             onTapModal({ id, index, sender: this });
         }
+
+        //event.preventDefault();
     }
 
     protected onModalPlaneKeyPress(event: KeyboardEvent<HTMLDivElement>)

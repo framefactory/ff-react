@@ -8,6 +8,7 @@
 import * as React from "react";
 import { MouseEvent, WheelEvent, PointerEvent, SyntheticEvent } from "react";
 
+import { Dictionary } from "@ff/core/types";
 import { IComponentProps, IComponentEvent } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -23,6 +24,13 @@ export interface IManipEventHandler
 {
     onPointer: (event: IManipPointerEvent) => boolean;
     onTrigger: (event: IManipTriggerEvent) => boolean;
+}
+
+export interface IPointerPosition
+{
+    id: number;
+    clientX: number;
+    clientY: number;
 }
 
 export interface IManipBaseEvent extends IComponentEvent<ManipTarget>
@@ -43,9 +51,8 @@ export interface IManipPointerEvent extends IManipBaseEvent
     source: "mouse" | "pen" | "touch";
 
     isPrimary: boolean;
-    activePointerList: PointerEvent[];
-    activePointerCount: number;
-    downPointerCount: number;
+    activePositions: IPointerPosition[];
+    pointerCount: number;
 
     movementX: number;
     movementY: number;
@@ -72,6 +79,7 @@ export interface IManipTargetProps extends IComponentProps
     onTrigger?: (event: IManipTriggerEvent) => boolean;
 }
 
+
 export default class ManipTarget extends React.Component<IManipTargetProps, {}>
 {
     static readonly defaultProps: IManipTargetProps = {
@@ -79,9 +87,8 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
     };
 
     protected elementRef: React.RefObject<HTMLDivElement>;
-    protected activePointers: { [id:string]: PointerEvent };
+    protected activePositions: IPointerPosition[];
     protected activeType: string;
-    protected downPointerCount: number;
 
     protected centerX: number;
     protected centerY: number;
@@ -98,9 +105,8 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
         this.onWheel = this.onWheel.bind(this);
 
         this.elementRef = React.createRef();
-        this.activePointers = {};
+        this.activePositions = [];
         this.activeType = "";
-        this.downPointerCount = 0;
         this.centerX = 0;
         this.centerY = 0;
     }
@@ -136,8 +142,11 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
         }
 
         this.activeType = event.pointerType;
-        this.activePointers[event.pointerId] = event;
-        this.downPointerCount++;
+        this.activePositions.push({
+            id: event.pointerId,
+            clientX: event.clientX,
+            clientY: event.clientY
+        });
 
         if (this.props.capture !== false) {
             this.elementRef.current.setPointerCapture(event.pointerId);
@@ -153,7 +162,15 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
 
     protected onPointerMove(event: PointerEvent)
     {
-        this.activePointers[event.pointerId] = event;
+        const activePositions = this.activePositions;
+
+        for (let i = 0, n = activePositions.length; i < n; ++i) {
+            const position = activePositions[i];
+            if (event.pointerId === position.id) {
+                position.clientX = event.clientX;
+                position.clientY = event.clientY;
+            }
+        }
 
         const manipEvent = this.createManipPointerEvent(event, "move");
 
@@ -165,21 +182,31 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
 
     protected onPointerUpOrCancel(event: PointerEvent)
     {
-        this.activePointers[event.pointerId] = event;
-        this.downPointerCount--;
+        const activePositions = this.activePositions;
+        let found = false;
+
+        for (let i = 0, n = activePositions.length; i < n; ++i) {
+            if (event.pointerId === activePositions[i].id) {
+                activePositions.splice(i, 1);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            console.warn("orphan pointer up/cancel event #id", event.pointerId);
+            return;
+        }
 
         const manipEvent = this.createManipPointerEvent(event, "up");
-        if (manipEvent.activePointerCount === 0) {
+        if (activePositions.length === 0) {
             this.activeType = "";
-            this.downPointerCount = 0;
         }
 
         if (this.sendPointerEvent(manipEvent)) {
             event.stopPropagation();
             event.preventDefault();
         }
-
-        this.activePointers[event.pointerId] = undefined;
     }
 
     protected onDoubleClick(event: MouseEvent)
@@ -219,33 +246,33 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
         // calculate center and movement
         let centerX = 0;
         let centerY = 0;
+        let movementX = 0;
+        let movementY = 0;
 
-        let pointerCount = 0;
-        let pointerList = [];
+        const positions = this.activePositions;
+        const count = positions.length;
 
-        for (let id in this.activePointers) {
-            const pointer = this.activePointers[id];
-            if (pointer) {
-                pointerList.push(pointer);
-                pointerCount++;
-                centerX += pointer.clientX;
-                centerY += pointer.clientY;
+        if (count > 0) {
+            for (let i = 0; i < count; ++i) {
+                centerX += positions[i].clientX;
+                centerY += positions[i].clientY;
             }
+
+            centerX /= count;
+            centerY /= count;
+
+            if (type === "move") {
+                movementX = centerX - this.centerX;
+                movementY = centerY - this.centerY;
+            }
+
+            this.centerX = centerX;
+            this.centerY = centerY;
         }
-
-        centerX /= pointerCount;
-        centerY /= pointerCount;
-
-        let movementX = centerX - this.centerX;
-        let movementY = centerY - this.centerY;
-
-        if (type === "down" || type === "up") {
-            movementX = 0;
-            movementY = 0;
+        else {
+            centerX = this.centerX;
+            centerY = this.centerY;
         }
-
-        this.centerX = centerX;
-        this.centerY = centerY;
 
         return {
             originalEvent: event,
@@ -256,9 +283,8 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
             index: this.props.index,
 
             isPrimary: event.isPrimary,
-            activePointerList: pointerList,
-            activePointerCount: pointerCount,
-            downPointerCount: this.downPointerCount,
+            activePositions: positions,
+            pointerCount: count,
 
             centerX,
             centerY,

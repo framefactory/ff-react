@@ -27,7 +27,6 @@ export default class OrbitManip implements IManipEventHandler
 {
     protected mode: ManipMode;
     protected phase: ManipPhase;
-    protected prevEvent: IManipPointerEvent;
     protected prevPinchDist: number;
 
     protected deltaX: number;
@@ -41,7 +40,6 @@ export default class OrbitManip implements IManipEventHandler
     {
         this.mode = "off";
         this.phase = "off";
-        this.prevEvent = null;
         this.prevPinchDist = 0;
 
         this.deltaX = 0;
@@ -103,39 +101,27 @@ export default class OrbitManip implements IManipEventHandler
             }
             else if (event.type === "up") {
                 this.phase = "release";
-                this.prevEvent = null;
                 return true;
             }
-            else if (event.downPointerCount === 0) {
-                return false;
-            }
         }
 
-        let prevEvent = this.prevEvent;
-        this.prevEvent = event;
-
-        if (event.type === "up" || event.type === "down") {
-            prevEvent = event;
-
-            const mode = this.getModeFromEvent(event);
-            if (mode !== this.mode && event.type === "down") {
-                this.mode = mode;
-            }
+        if (event.type === "down") {
+            this.mode = this.getModeFromEvent(event);
         }
 
-        this.deltaX += (event.centerX - prevEvent.centerX);
-        this.deltaY += (event.centerY - prevEvent.centerY);
+        this.deltaX += event.movementX;
+        this.deltaY += event.movementY;
 
         // calculate pinch
-        if (event.activePointerCount === 2) {
-            const activePointerList = event.activePointerList;
-            const dx = activePointerList[1].clientX - activePointerList[0].clientX;
-            const dy = activePointerList[1].clientY - activePointerList[0].clientY;
+        if (event.pointerCount === 2) {
+            const positions = event.activePositions;
+            const dx = positions[1].clientX - positions[0].clientX;
+            const dy = positions[1].clientY - positions[0].clientY;
             const pinchDist = Math.sqrt(dx * dx + dy * dy);
 
             const prevPinchDist = this.prevPinchDist || pinchDist;
-            this.deltaPinch = prevPinchDist > 0 ? (pinchDist / prevPinchDist) : 1;
-            this.prevPinchDist = prevPinchDist;
+            this.deltaPinch *= prevPinchDist > 0 ? (pinchDist / prevPinchDist) : 1;
+            this.prevPinchDist = pinchDist;
         }
         else {
             this.deltaPinch = 1;
@@ -226,8 +212,7 @@ export default class OrbitManip implements IManipEventHandler
             }
         }
         else if (event.source === "touch") {
-
-            const count = event.activePointerCount;
+            const count = event.pointerCount;
 
             if (count === 1) {
                 return "orbit";
