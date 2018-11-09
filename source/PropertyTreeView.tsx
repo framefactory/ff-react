@@ -7,12 +7,11 @@
 
 import * as React from "react";
 
-import { Dictionary } from "../../ff-core/source/types";
+import { Dictionary } from "@ff/core/types";
 import Property from "@ff/core/ecs/Property";
-import PropertySet from "@ff/core/ecs/PropertySet";
+import PropertySet, { IPropertySetChangeEvent } from "@ff/core/ecs/PropertySet";
 
-import Tree, { ITreeNode } from "@ff/react/Tree";
-import { IPropertySetChangeEvent } from "../../ff-core/source/ecs/PropertySet";
+import Tree, { ITreeNode } from "./Tree";
 import PropertyView from "./PropertyView";
 import { MouseEvent } from "react";
 
