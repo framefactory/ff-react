@@ -370,9 +370,12 @@ $tx-medium: 0.3s;
   }
 
   .ff-text {
-    position: relative;
+    @include full-size;
     text-align: left;
-    padding: 0 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 1px;
   }
 
   .ff-align-right {

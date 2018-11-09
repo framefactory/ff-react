@@ -77,9 +77,9 @@ export default class Tree<T = ITreeNode> extends React.Component<ITreeProps<T>, 
 
         const id = getId(node);
         const children = getChildren(node);
-        const isExpanded = expanded && expanded[id];
-        const isSelected = selected && selected[id];
-        const modeClass = children.length > 0 ? (isExpanded ? "ff-expanded" : "ff-collapsed") : "ff-leaf";
+        const isExpanded = expanded ? !!expanded[id] : true;
+        const isSelected = selected ? !!selected[id] : false;
+        const modeClass = children.length > 0 ? (isExpanded ? "ff-inner ff-expanded" : "ff-inner ff-collapsed") : "ff-leaf";
         const c = getClass(node);
         const classes = "ff-content " + modeClass + (isSelected ? " ff-selected" : "") + (c ? " " + c : "");
 

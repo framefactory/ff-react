@@ -204,8 +204,9 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
     {
         const format = this.state.format;
         const delta = Math.abs(dx) > Math.abs(dy) ? dx : -dy;
+        const multiplier = event.shiftKey ? 10 : (event.ctrlKey ? 0.1 : 1);
 
-        let increment = delta * (format.step || (format.percent ? 0.002 : 0.1));
+        let increment = delta * multiplier * (format.step || (format.percent ? 0.002 : 0.02));
         this.incrementValue(increment);
     }
 
