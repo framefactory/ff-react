@@ -9,11 +9,11 @@ import * as React from "react";
 
 import Property from "@ff/core/ecs/Property";
 
-import PropertyField, {
-    IPropertyFieldChangeEvent,
-    IPropertyFieldCommitEvent,
-    IPropertyFieldFormat
-} from "./PropertyField";
+import FieldEdit, {
+    IFieldEditChangeEvent,
+    IFieldEditCommitEvent,
+    IFieldEditFormat
+} from "./FieldEdit";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +36,7 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         className: "ff-property-view"
     };
 
+    protected fields: FieldEdit[] = [];
     protected isUpdating = false;
 
     constructor(props: IPropertyViewProps)
@@ -66,12 +67,15 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         const fields = [];
         const elementCount = property.elements;
 
+        //console.log("PropertyView.render - ", property.path, property.value);
+
         if (elementCount > 4) {
 
         }
         else {
             const labels = property.schema.labels || _LABELS;
-            const format: IPropertyFieldFormat = {
+
+            const format: IFieldEditFormat = {
                 type: property.type,
                 preset: property.preset,
                 min: property.schema.min,
@@ -79,7 +83,8 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
                 step: property.schema.step,
                 precision: property.schema.precision,
                 bar: property.schema.bar,
-                percent: property.schema.percent
+                percent: property.schema.percent,
+                options: property.schema.options
             };
 
             for (let i = 0; i < elementCount; ++i) {
@@ -91,14 +96,15 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
                     </div>);
                 }
 
-                fields.push(<PropertyField
+                fields.push(<FieldEdit
+                    ref={e => this.fields[i] = e}
                     index={i}
                     key={"f" + i}
                     value={elementCount > 1 ? property.value[i] : property.value}
                     format={format}
                     onChange={this.onFieldChange}
                     onCommit={this.onFieldCommit}
-                />)
+                />);
             }
         }
 
@@ -110,7 +116,7 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         );
     }
 
-    protected onFieldChange(event: IPropertyFieldChangeEvent)
+    protected onFieldChange(event: IFieldEditChangeEvent)
     {
         const property = this.props.property;
 
@@ -126,7 +132,7 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         this.isUpdating = false;
     }
 
-    protected onFieldCommit(event: IPropertyFieldCommitEvent)
+    protected onFieldCommit(event: IFieldEditCommitEvent)
     {
         const property = this.props.property;
 
@@ -145,7 +151,17 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
     protected onValueChange(value)
     {
         if (!this.isUpdating) {
-            this.forceUpdate();
+            const property = this.props.property;
+            if (property.isArray()) {
+                if (property.elements <= 4) {
+                    for (let i = 0; i < property.elements; ++i) {
+                        this.fields[i].setValue(property.value[i]);
+                    }
+                }
+            }
+            else {
+                this.fields[0].setValue(property.value);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ import Draggable, { PointerEvent } from "./Draggable";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export interface IPropertyFieldFormat
+export interface IFieldEditFormat
 {
     type: string,
     preset?: any,
@@ -22,32 +22,33 @@ export interface IPropertyFieldFormat
     step?: number,
     precision?: number,
     bar?: boolean,
-    percent?: boolean
+    percent?: boolean,
+    options?: string[]
 }
 
-export interface IPropertyFieldChangeEvent extends IComponentEvent<PropertyField> { value: number | string | boolean }
-export interface IPropertyFieldCommitEvent extends IComponentEvent<PropertyField> { value: number | string | boolean }
+export interface IFieldEditChangeEvent extends IComponentEvent<FieldEdit> { value: number | string | boolean }
+export interface IFieldEditCommitEvent extends IComponentEvent<FieldEdit> { value: number | string | boolean }
 
-/** Properties for [[PropertyField]] component. */
-export interface IPropertyFieldProps extends IComponentProps
+/** Properties for [[FieldEdit]] component. */
+export interface IFieldEditProps extends IComponentProps
 {
     value?: any;
-    format?: IPropertyFieldFormat;
-    onChange?: (event: IPropertyFieldChangeEvent) => void;
-    onCommit?: (event: IPropertyFieldCommitEvent) => void;
+    format?: IFieldEditFormat;
+    onChange?: (event: IFieldEditChangeEvent) => void;
+    onCommit?: (event: IFieldEditCommitEvent) => void;
 }
 
-export interface IPropertyFieldState
+export interface IFieldEditState
 {
     value: any;
-    format: IPropertyFieldFormat;
+    format: IFieldEditFormat;
     isDragging: boolean;
     isEditing: boolean;
 }
 
-export default class PropertyField extends React.Component<IPropertyFieldProps, IPropertyFieldState>
+export default class FieldEdit extends React.Component<IFieldEditProps, IFieldEditState>
 {
-    static defaultProps: IPropertyFieldProps = {
+    static defaultProps: IFieldEditProps = {
         className: "ff-control ff-property-field"
     };
 
@@ -57,26 +58,26 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
         display: "block"
     };
 
-    static Float: IPropertyFieldFormat = {
+    static Float: IFieldEditFormat = {
         type: "number",
         preset: 0,
         step: 0.01,
         precision: 3
     };
 
-    static Integer: IPropertyFieldFormat = {
+    static Integer: IFieldEditFormat = {
         type: "number",
         preset: 0,
         step: 0.1,
         precision: 0
     };
 
-    static String: IPropertyFieldFormat = {
+    static String: IFieldEditFormat = {
         type: "string",
         preset: "",
     };
 
-    static Color: IPropertyFieldFormat = {
+    static Color: IFieldEditFormat = {
         type: "color",
         preset: [ 0, 0, 0 ]
     };
@@ -84,7 +85,7 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
     inputElement: HTMLInputElement;
     startValue: any;
 
-    constructor(props: IPropertyFieldProps)
+    constructor(props: IFieldEditProps)
     {
         let value = props.value;
         let format = props.format;
@@ -135,7 +136,7 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
 
         const classes = className + (isDragging ? " ff-dragging" : "");
 
-        const textStyle = PropertyField.textStyle;
+        const textStyle = FieldEdit.textStyle;
 
         let barStyle = {
             width: `${this.getBarWidthPercent()}%`
@@ -218,7 +219,20 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
 
     private onTap()
     {
-        this.startEditing();
+        const format = this.state.format;
+        const type = format.type;
+
+        if (type === "boolean") {
+            this.setValue(!this.state.value);
+        }
+        else if (type === "number" || type === "string") {
+            if (format.options) {
+
+            }
+            else {
+                this.startEditing();
+            }
+        }
     }
 
     private setInputRef(element: HTMLInputElement)
@@ -302,9 +316,15 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
         let value = this.state.value;
         let text = "";
 
+
         switch(format.type) {
             case "number":
-                if (format.percent) {
+                if (format.options) {
+                    const last = format.options.length - 1;
+                    value = value < 0 ? 0 : (value > last ? last : Math.trunc(value));
+                    text = format.options[value];
+                }
+                else if (format.percent) {
                     value *= 100;
                     text = value.toFixed(format.precision || 0) + " %";
                 }
@@ -312,8 +332,14 @@ export default class PropertyField extends React.Component<IPropertyFieldProps, 
                     text = value.toFixed(format.precision || 2);
                 }
                 break;
+            case "boolean":
+                text = value ? "true" : "false";
+                break;
             case "string":
                 text = "" + value;
+                break;
+            case "object":
+                text = "[object]";
                 break;
         }
 
