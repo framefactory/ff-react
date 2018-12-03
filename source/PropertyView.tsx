@@ -65,7 +65,7 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         } = this.props;
 
         const fields = [];
-        const elementCount = property.elements;
+        const elementCount = property.elementCount;
 
         //console.log("PropertyView.render - ", property.path, property.value);
 
@@ -153,8 +153,8 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
         if (!this.isUpdating) {
             const property = this.props.property;
             if (property.isArray()) {
-                if (property.elements <= 4) {
-                    for (let i = 0; i < property.elements; ++i) {
+                if (property.elementCount <= 4) {
+                    for (let i = 0; i < property.elementCount; ++i) {
                         this.fields[i].setValue(property.value[i]);
                     }
                 }
