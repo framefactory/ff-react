@@ -7,6 +7,7 @@
 
 import math from "@ff/core/math";
 import { IManipEventHandler, IManipPointerEvent, IManipTriggerEvent } from "./ManipTarget";
+import { EManipPointerEventSource, EManipPointerEventType, EManipTriggerEventType } from "@ff/browser/ManipTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -96,16 +97,16 @@ export default class OrbitManip implements IManipEventHandler
     onPointer(event: IManipPointerEvent): boolean
     {
         if (event.isPrimary) {
-            if (event.type === "down") {
+            if (event.type === EManipPointerEventType.Down) {
                 this.phase = "active";
             }
-            else if (event.type === "up") {
+            else if (event.type === EManipPointerEventType.Up) {
                 this.phase = "release";
                 return true;
             }
         }
 
-        if (event.type === "down") {
+        if (event.type === EManipPointerEventType.Down) {
             this.mode = this.getModeFromEvent(event);
         }
 
@@ -133,7 +134,7 @@ export default class OrbitManip implements IManipEventHandler
 
     onTrigger(event: IManipTriggerEvent): boolean
     {
-        if (event.type === "wheel") {
+        if (event.type === EManipTriggerEventType.Wheel) {
             this.deltaWheel += math.limit(event.wheel, -1, 1);
             return true;
         }
@@ -181,7 +182,7 @@ export default class OrbitManip implements IManipEventHandler
 
     protected getModeFromEvent(event: IManipPointerEvent): ManipMode
     {
-        if (event.source === "mouse") {
+        if (event.source === EManipPointerEventSource.Mouse) {
             const button = event.originalEvent.button;
 
             // left button
@@ -211,7 +212,7 @@ export default class OrbitManip implements IManipEventHandler
                 return "dolly";
             }
         }
-        else if (event.source === "touch") {
+        else if (event.source === EManipPointerEventSource.Touch) {
             const count = event.pointerCount;
 
             if (count === 1) {
