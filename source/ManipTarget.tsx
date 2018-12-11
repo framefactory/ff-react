@@ -7,7 +7,7 @@
 
 import * as React from "react";
 
-import ManipTargetHelper, { IManipPointerEvent, IManipTriggerEvent } from "@ff/browser/ManipTarget";
+import ManipTargetHelper, { IManip, IManipPointerEvent, IManipTriggerEvent } from "@ff/browser/ManipTarget";
 import { IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ export interface IManipTargetProps extends IComponentProps
 }
 
 
-export default class ManipTarget extends React.Component<IManipTargetProps, {}>
+export default class ManipTarget extends React.Component<IManipTargetProps, {}> implements IManip
 {
     static readonly defaultProps: IManipTargetProps = {
         className: "ff-manip-target"
@@ -54,14 +54,10 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
     {
         super(props);
 
-        this.sendPointerEvent = this.sendPointerEvent.bind(this);
-        this.sendTriggerEvent = this.sendTriggerEvent.bind(this);
-
         this.elementRef = React.createRef();
 
         this.manipHelper = new ManipTargetHelper();
-        this.manipHelper.onPointer = this.sendPointerEvent;
-        this.manipHelper.onTrigger = this.sendTriggerEvent;
+        this.manipHelper.next = this;
     }
 
     render()
@@ -90,7 +86,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
     }
 
 
-    protected sendPointerEvent(event: IManipPointerEvent): boolean
+    onPointer(event: IManipPointerEvent): boolean
     {
         const props = this.props;
 
@@ -103,7 +99,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}>
         }
     }
 
-    protected sendTriggerEvent(event: IManipTriggerEvent): boolean
+    onTrigger(event: IManipTriggerEvent): boolean
     {
         const props = this.props;
 
