@@ -8,8 +8,8 @@
 import * as React from "react";
 
 import { Dictionary } from "@ff/core/types";
-import Property from "@ff/core/ecs/Property";
-import PropertySet, { IPropertySetChangeEvent } from "@ff/core/ecs/PropertySet";
+import Property from "@ff/graph/Property";
+import PropertySet, { IPropertySetChangeEvent } from "@ff/graph/PropertySet";
 
 import Tree, { ITreeNode } from "./Tree";
 import PropertyView from "./PropertyView";

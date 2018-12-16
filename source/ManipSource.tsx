@@ -345,7 +345,7 @@ export default class ManipSource
 
             button: event.button,
             buttons: event.buttons,
-            wheel: type === "wheel" ? (wheelEvent.wheelDelta || wheelEvent.deltaY) : 0,
+            wheel: type === "wheel" ? wheelEvent.deltaY : 0,
 
             changedTouches: null,
             targetTouches: null,

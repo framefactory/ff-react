@@ -7,7 +7,7 @@
 
 import * as React from "react";
 
-import Property from "@ff/core/ecs/Property";
+import Property from "@ff/graph/Property";
 
 import FieldEdit, {
     IFieldEditChangeEvent,

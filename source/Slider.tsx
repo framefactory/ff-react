@@ -9,7 +9,7 @@ import * as React from "react";
 import { CSSProperties } from "react";
 
 import math from "@ff/core/math";
-import ManipSource, { IManipListener, IManipEvent } from "./ManipSource.old";
+import ManipSource, { IManipListener, IManipEvent } from "./ManipSource";
 
 ////////////////////////////////////////////////////////////////////////////////
 
