@@ -1,14 +1,14 @@
 {
-    "name": "ff-ui",
-    "version": "1.0.0",
-    "description": "FF UI Typescript/React Foundation Library",
+    "name": "ff-react",
+    "version": "0.1.0",
+    "description": "FF React Typescript Foundation Library",
     "scripts": {
         "build": "tsc -p source",
-        "test": "tsc -p test; mocha -c --ui tdd node_modules/@ff/test/ui/test.js || exit 0"
+        "test": "tsc -p test; mocha -c --ui tdd node_modules/@ff/test/react/test.js || exit 0"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/framelab/ff-ui.git"
+        "url": "git+https://github.com/framelab/ff-react.git"
     },
     "keywords": [
         "typescript",
@@ -20,17 +20,20 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/framelab/ff-ui/issues"
+        "url": "https://github.com/framelab/ff-react/issues"
     },
-    "homepage": "https://github.com/framelab/ff-ui#readme",
+    "homepage": "https://github.com/framelab/ff-react#readme",
+    "dependencies": {
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3"
+    },
     "devDependencies": {
-        "@types/chai": "^4.1.6",
+        "@types/chai": "^4.1.7",
         "@types/mocha": "^5.2.5",
-        "@types/react": "^16.4.15",
+        "@types/react": "^16.7.17",
+        "@types/react-dom": "^16.0.11",
         "chai": "^4.2.0",
         "mocha": "^5.2.0",
-        "react": "^16.5.2",
-        "react-dom": "^16.5.2",
-        "typescript": "^3.1.1"
+        "typescript": "^3.2.2"
     }
 }
