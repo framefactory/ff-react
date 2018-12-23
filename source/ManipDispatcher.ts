@@ -5,7 +5,7 @@
  * License: MIT
  */
 
-import { IManipEventHandler, IManipPointerEvent, IManipTriggerEvent } from "./ManipTarget";
+import { IManipEventHandler, IPointerEvent, ITriggerEvent } from "./ManipTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,7 @@ export default class ManipDispatcher implements IManipEventHandler
         }
     }
 
-    onPointer(event: IManipPointerEvent): boolean
+    onPointer(event: IPointerEvent): boolean
     {
         let consumed = false;
 
@@ -65,7 +65,7 @@ export default class ManipDispatcher implements IManipEventHandler
         return consumed;
     }
 
-    onTrigger(event: IManipTriggerEvent): boolean
+    onTrigger(event: ITriggerEvent): boolean
     {
         let consumed = false;
 

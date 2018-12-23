@@ -6,8 +6,8 @@
  */
 
 import math from "@ff/core/math";
-import { IManipEventHandler, IManipPointerEvent, IManipTriggerEvent } from "./ManipTarget";
-import { EManipPointerEventSource, EManipPointerEventType, EManipTriggerEventType } from "@ff/browser/ManipTarget";
+import { IManipEventHandler, IPointerEvent, ITriggerEvent } from "./ManipTarget";
+import { PointerEventSource, PointerEventType, TriggerEventType } from "@ff/browser/ManipTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -94,19 +94,19 @@ export default class OrbitManip implements IManipEventHandler
         return this.deltaOrbit;
     }
 
-    onPointer(event: IManipPointerEvent): boolean
+    onPointer(event: IPointerEvent): boolean
     {
         if (event.isPrimary) {
-            if (event.type === EManipPointerEventType.Down) {
+            if (event.type === "pointer-down") {
                 this.phase = "active";
             }
-            else if (event.type === EManipPointerEventType.Up) {
+            else if (event.type === "pointer-up") {
                 this.phase = "release";
                 return true;
             }
         }
 
-        if (event.type === EManipPointerEventType.Down) {
+        if (event.type === "pointer-down") {
             this.mode = this.getModeFromEvent(event);
         }
 
@@ -132,9 +132,9 @@ export default class OrbitManip implements IManipEventHandler
         return true;
     }
 
-    onTrigger(event: IManipTriggerEvent): boolean
+    onTrigger(event: ITriggerEvent): boolean
     {
-        if (event.type === EManipTriggerEventType.Wheel) {
+        if (event.type === "wheel") {
             this.deltaWheel += math.limit(event.wheel, -1, 1);
             return true;
         }
@@ -180,9 +180,9 @@ export default class OrbitManip implements IManipEventHandler
         }
     }
 
-    protected getModeFromEvent(event: IManipPointerEvent): ManipMode
+    protected getModeFromEvent(event: IPointerEvent): ManipMode
     {
-        if (event.source === EManipPointerEventSource.Mouse) {
+        if (event.source === "mouse") {
             const button = event.originalEvent.button;
 
             // left button
@@ -212,7 +212,7 @@ export default class OrbitManip implements IManipEventHandler
                 return "dolly";
             }
         }
-        else if (event.source === EManipPointerEventSource.Touch) {
+        else if (event.source === "touch") {
             const count = event.pointerCount;
 
             if (count === 1) {

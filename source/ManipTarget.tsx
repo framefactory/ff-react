@@ -7,12 +7,12 @@
 
 import * as React from "react";
 
-import ManipTargetHelper, { IManip, IManipPointerEvent, IManipTriggerEvent } from "@ff/browser/ManipTarget";
+import ManipTargetHelper, { IManip, IPointerEvent, ITriggerEvent } from "@ff/browser/ManipTarget";
 import { IComponentProps } from "./common";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export { IManipPointerEvent, IManipTriggerEvent };
+export { IPointerEvent, ITriggerEvent };
 
 //export type PointerEvent = React.PointerEvent<HTMLDivElement>;
 //export type MouseEvent = React.MouseEvent<HTMLDivElement>;
@@ -20,8 +20,8 @@ export { IManipPointerEvent, IManipTriggerEvent };
 
 export interface IManipEventHandler
 {
-    onPointer: (event: IManipPointerEvent) => boolean;
-    onTrigger: (event: IManipTriggerEvent) => boolean;
+    onPointer: (event: IPointerEvent) => boolean;
+    onTrigger: (event: ITriggerEvent) => boolean;
 }
 
 
@@ -34,9 +34,9 @@ export interface IManipTargetProps extends IComponentProps
     /** Handler for manip events; an object implementing the [[IManipHandler]] interface. */
     handler?: IManipEventHandler;
     /** Callback function for pointer events. */
-    onPointer?: (event: IManipPointerEvent) => boolean;
+    onPointer?: (event: IPointerEvent) => boolean;
     /** Callback function for trigger events (wheel, context menu, etc.) */
-    onTrigger?: (event: IManipTriggerEvent) => boolean;
+    onTrigger?: (event: ITriggerEvent) => boolean;
 }
 
 
@@ -86,7 +86,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}> 
     }
 
 
-    onPointer(event: IManipPointerEvent): boolean
+    onPointer(event: IPointerEvent): boolean
     {
         const props = this.props;
 
@@ -99,7 +99,7 @@ export default class ManipTarget extends React.Component<IManipTargetProps, {}> 
         }
     }
 
-    onTrigger(event: IManipTriggerEvent): boolean
+    onTrigger(event: ITriggerEvent): boolean
     {
         const props = this.props;
 

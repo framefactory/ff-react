@@ -5,7 +5,7 @@
  * License: MIT
  */
 
-import { Dictionary, Partial } from "@ff/core/types";
+import { Dictionary } from "@ff/core/types";
 
 import * as React from "react";
 import { ReactNode } from "react";
