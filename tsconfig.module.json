@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "target": "ES6",
+        "module": "commonjs",
+        "experimentalDecorators": true,
+        "jsx": "react",
+
+        "declaration": true,
+        "sourceMap": true,
+
+        "rootDir": "source",
+        "outDir": "../../node_modules/@ff/react"
+    },
+    "include": [
+        "source/**/*"
+    ]
+}
