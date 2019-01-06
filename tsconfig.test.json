@@ -10,12 +10,12 @@
         "sourceMap": true,
 
         "rootDir": "test",
-        "outDir": "../node_modules/@ff/test/react"
+        "outDir": "../../node_modules/@ff/test/react"
     },
     "include": [
         "test/**/*"
     ],
     "references": [{
-        "path": "../source"
+        "path": "tsconfig.module.json"
     }]
 }
