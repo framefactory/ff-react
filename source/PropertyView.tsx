@@ -77,7 +77,7 @@ export default class PropertyView extends React.Component<IPropertyViewProps, IP
 
             const format: IFieldEditFormat = {
                 type: property.type,
-                preset: property.preset,
+                preset: property.schema.preset,
                 min: property.schema.min,
                 max: property.schema.max,
                 step: property.schema.step,
