@@ -9,7 +9,7 @@ import * as React from "react";
 
 import { Dictionary } from "@ff/core/types";
 import Property from "@ff/graph/Property";
-import PropertySet, { IPropertySetChangeEvent } from "@ff/graph/PropertySet";
+import PropertyGroup, { IPropertyGroupPropertyEvent } from "@ff/graph/PropertyGroup";
 
 import Tree, { ITreeNode } from "./Tree";
 import PropertyView from "./PropertyView";
@@ -26,7 +26,7 @@ export interface IPropertyTreeViewProps
 {
     className?: string;
     name?: string;
-    propertySet: PropertySet;
+    propertySet: PropertyGroup;
 }
 
 export interface IPropertyTreeViewState
@@ -105,9 +105,9 @@ export default class PropertyTreeView extends React.Component<IPropertyTreeViewP
         );
     }
 
-    protected static createPropertyTree(propertySet: PropertySet, name: string): IPropertyTreeNode
+    protected static createPropertyTree(propertyGroup: PropertyGroup, name: string): IPropertyTreeNode
     {
-        const properties = propertySet.properties;
+        const properties = propertyGroup.properties;
         const tree = {
             id: "root",
             name: name || "Root",
@@ -144,10 +144,10 @@ export default class PropertyTreeView extends React.Component<IPropertyTreeViewP
         return tree;
     }
 
-    protected static expandAll(propertySet: PropertySet): Dictionary<boolean>
+    protected static expandAll(propertyGroup: PropertyGroup): Dictionary<boolean>
     {
         const expanded = { root: true };
-        propertySet.properties.forEach(property => {
+        propertyGroup.properties.forEach(property => {
             property.path.split(".").forEach(frag => expanded[frag] = true);
         });
         return expanded;
@@ -159,7 +159,7 @@ export default class PropertyTreeView extends React.Component<IPropertyTreeViewP
         this.forceUpdate();
     }
 
-    protected onPropertyChange(event: IPropertySetChangeEvent)
+    protected onPropertyChange(event: IPropertyGroupPropertyEvent)
     {
 
     }

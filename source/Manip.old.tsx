@@ -134,7 +134,7 @@ export default class Manip extends React.Component<IManipProps, {}>
             onContextMenu: this.onContextMenu
         };
 
-        return React.createElement("div", props, children);
+        return React.createElement("div", props, children) as any;
     }
 
     protected onPointerDown(event: PointerEvent): void
