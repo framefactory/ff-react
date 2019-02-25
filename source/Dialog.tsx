@@ -22,7 +22,7 @@ export class Anchor extends React.Component<IAnchorProps, {}>
 {
     render()
     {
-        const child = React.Children.only(this.props.children);
+        const child: any = React.Children.only(this.props.children);
         return React.cloneElement(child, { ref: this.props.elementRef });
     }
 }
