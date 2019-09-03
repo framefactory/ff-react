@@ -82,7 +82,7 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
     {
         const canvasElement = this.canvasRef.current;
         if (canvasElement && !this.canvasContext) {
-            return this.canvasContext = canvasElement.getContext("2d", attribs);
+            return this.canvasContext = canvasElement.getContext("2d", attribs) as CanvasRenderingContext2D;
         }
     }
 
