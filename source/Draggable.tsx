@@ -6,15 +6,20 @@
  */
 
 import * as React from "react";
-import { MouseEvent, PointerEvent, ReactNode } from "react";
+
+import {
+    MouseEvent as ReactMouseEvent,
+    PointerEvent as ReactPointerEvent,
+    ReactNode
+} from "react";
 
 import { IComponentProps, IComponentEvent } from "./common";
 import { IPointableProps } from "./Pointable";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export type MouseEvent = MouseEvent<HTMLDivElement>;
-export type PointerEvent = PointerEvent<HTMLDivElement>;
+export type MouseEvent = ReactMouseEvent<HTMLDivElement>;
+export type PointerEvent = ReactPointerEvent<HTMLDivElement>;
 
 export interface IDraggablePressEvent extends IComponentEvent<Draggable> { }
 export interface IDraggableReleaseEvent extends IComponentEvent<Draggable> { }

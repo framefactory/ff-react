@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties, PointerEvent, KeyboardEvent } from "react";
+import { CSSProperties, PointerEvent as ReactPointerEvent, KeyboardEvent } from "react";
 
 import { IComponentEvent, IComponentProps } from "./common";
 
@@ -72,7 +72,7 @@ export interface IButtonState
     selected: boolean;
 }
 
-export type PointerEvent = PointerEvent<HTMLDivElement>;
+export type PointerEvent = ReactPointerEvent<HTMLDivElement>;
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -6,15 +6,21 @@
  */
 
 import * as React from "react";
-import { CSSProperties, ReactNode, MouseEvent, PointerEvent } from "react";
+
+import {
+    ReactNode,
+    MouseEvent as ReactMouseEvent,
+    PointerEvent as ReactPointerEvent
+} from "react";
+
 import { IComponentProps } from "./common";
 
 const _verbose = false;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export type MouseEvent = MouseEvent<HTMLDivElement>;
-export type PointerEvent = PointerEvent<HTMLDivElement>;
+export type MouseEvent = ReactMouseEvent<HTMLDivElement>;
+export type PointerEvent = ReactPointerEvent<HTMLDivElement>;
 
 /** Properties for [[Pointable]] component. */
 export interface IPointableProps extends IComponentProps

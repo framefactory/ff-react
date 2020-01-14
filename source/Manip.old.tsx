@@ -6,7 +6,14 @@
  */
 
 import * as React from "react";
-import { CSSProperties, MouseEvent, WheelEvent, PointerEvent, SyntheticEvent, ReactNode } from "react";
+
+import {
+    MouseEvent as ReactMouseEvent,
+    WheelEvent as ReactWheelEvent,
+    PointerEvent as ReactPointerEvent,
+    SyntheticEvent,
+    ReactNode
+} from "react";
 
 import math from "@ff/core/math";
 
@@ -17,9 +24,9 @@ import { IPointableProps } from "./Pointable";
 
 export type ManipEventType = "down" | "move" | "up" | "wheel" | "dblclick" | "contextmenu";
 
-export type PointerEvent = PointerEvent<HTMLDivElement>;
-export type MouseEvent = MouseEvent<HTMLDivElement>;
-export type WheelEvent = WheelEvent<HTMLDivElement>;
+export type PointerEvent = ReactPointerEvent<HTMLDivElement>;
+export type MouseEvent = ReactMouseEvent<HTMLDivElement>;
+export type WheelEvent = ReactWheelEvent<HTMLDivElement>;
 
 export interface IManipEvent extends IComponentEvent<Manip>
 {
