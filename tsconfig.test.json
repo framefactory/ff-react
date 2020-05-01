@@ -9,13 +9,13 @@
         "declaration": true,
         "sourceMap": true,
 
-        "rootDir": "test",
-        "outDir": "../../node_modules/@ff/test/react"
+        "outDir": "built/test",
+        "rootDir": "test"
     },
     "include": [
         "test/**/*"
     ],
     "references": [{
-        "path": "tsconfig.module.json"
+        "path": "tsconfig.json"
     }]
 }

@@ -1,11 +1,14 @@
 {
     "compilerOptions": {
-        "noEmit": true,
+        "composite": true,
         "target": "ES6",
-        "module": "commonjs",
+        "module": "CommonJS",
         "experimentalDecorators": true,
-        "jsx": "react",
         "sourceMap": true,
+        "jsx": "react",
+
+        "rootDir": "source",
+        "outDir": "built/export",
 
         "baseUrl": ".",
         "paths": {
@@ -13,5 +16,13 @@
             "@ff/browser/*": [ "../ff-browser/source/*" ],
             "@ff/graph/*": [ "../ff-graph/source/*" ]
         }
-    }
+    },
+    "include": [
+        "source/**/*"
+    ],
+    "references": [
+        { "path":  "../ff-core/tsconfig.json" },
+        { "path":  "../ff-browser/tsconfig.json" },
+        { "path":  "../ff-graph/tsconfig.json" }
+    ]
 }

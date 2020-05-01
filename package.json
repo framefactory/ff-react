@@ -28,12 +28,13 @@
         "react-dom": "^16.6.3"
     },
     "devDependencies": {
-        "@types/chai": "^4.1.7",
-        "@types/mocha": "^5.2.5",
-        "@types/react": "^16.7.17",
-        "@types/react-dom": "^16.0.11",
+        "@types/chai": "^4.2.11",
+        "@types/mocha": "^7.0.2",
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.7",
         "chai": "^4.2.0",
-        "mocha": "^5.2.0",
-        "typescript": "^3.2.2"
+        "mocha": "^7.1.2",
+        "module-alias": "^2.2.2",
+        "typescript": "^3.8.3"
     }
 }
