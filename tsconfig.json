@@ -6,7 +6,6 @@
         "experimentalDecorators": true,
         "sourceMap": true,
         "jsx": "react",
-        "jsxFactory": "jsx",
 
         "rootDir": "source",
         "outDir": "built/export",

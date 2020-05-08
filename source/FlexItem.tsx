@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { CSSProperties, ReactNode } from "react";
 import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
@@ -23,17 +24,15 @@ export interface IFlexItemProps extends IComponentProps
     shrink?: number;
     /** The initial size of this item. Default is "auto". */
     basis?: number | "auto";
+    children?: ReactNode;
 }
 
 /**
  * Wraps its children in a div element. Flex layout settings grow, shrink
  * and basis are exposed as component properties. See also [[FlexContainer]].
  * This is a React stateless functional component.
- * @param {IFlexItemProps & {children?: React.ReactNode}} props
- * @returns {React.SFC<IFlexItemProps>}
- * @constructor
  */
-const FlexItem: React.FunctionComponent = function(props: React.PropsWithChildren<IFlexItemProps>)
+const FlexItem: React.FunctionComponent<IFlexItemProps> = function(props: IFlexItemProps)
 {
     const {
         className,
@@ -45,7 +44,7 @@ const FlexItem: React.FunctionComponent = function(props: React.PropsWithChildre
         children
     } = props;
 
-    const defaultStyle: React.CSSProperties = {
+    const defaultStyle: CSSProperties = {
         boxSizing: "border-box",
         position: "relative",
         flex: `${grow} ${shrink} ${basis}`

@@ -5,8 +5,8 @@
  * License: MIT
  */
 
+/* @jsx React.createElement */
 import * as React from "react";
-import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 

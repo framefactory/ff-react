@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { CSSProperties } from "react";
+
 import { jsx } from "@emotion/core";
 
 import FlexItem from "./FlexItem";
