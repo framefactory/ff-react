@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,7 @@ import { CSSProperties } from "react";
 export interface IBadgeProps
 {
     className?: string;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
     info?: boolean;
     update?: boolean;
     warning?: boolean;
@@ -24,7 +24,7 @@ export interface IBadgeProps
     text?: string;
 }
 
-const Badge: React.SFC<IBadgeProps> = function(props)
+const Badge: React.FunctionComponent = function(props: React.PropsWithChildren<IBadgeProps>)
 {
     let {
         className,

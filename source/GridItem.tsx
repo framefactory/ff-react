@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -24,7 +24,7 @@ export interface IGridItemProps extends IComponentProps
     align?: "start" | "end" | "center" | "stretch";
 }
 
-const _defaultStyle: CSSProperties = {
+const _defaultStyle: React.CSSProperties = {
     boxSizing: "border-box"
 };
 
@@ -36,7 +36,7 @@ const _defaultStyle: CSSProperties = {
  * @returns {React.SFC<IGridItemProps>}
  * @constructor
  */
-const GridItem: React.SFC<IGridItemProps> = function(props)
+const GridItem: React.FunctionComponent = function(props: React.PropsWithChildren<IGridItemProps>)
 {
     const {
         className,

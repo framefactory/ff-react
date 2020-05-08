@@ -8,6 +8,8 @@
 import * as React from "react";
 import { CSSProperties, ReactElement } from "react";
 
+import { jsx } from "@emotion/core";
+
 import { IComponentEvent } from "./common";
 import Draggable, { PointerEvent } from "./Draggable";
 

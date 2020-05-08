@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 import { IPointerDragEvent } from "./DragSource";

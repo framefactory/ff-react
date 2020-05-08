@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -33,7 +33,7 @@ export interface IFlexItemProps extends IComponentProps
  * @returns {React.SFC<IFlexItemProps>}
  * @constructor
  */
-const FlexItem: React.SFC<IFlexItemProps> = function(props)
+const FlexItem: React.FunctionComponent = function(props: React.PropsWithChildren<IFlexItemProps>)
 {
     const {
         className,
@@ -45,7 +45,7 @@ const FlexItem: React.SFC<IFlexItemProps> = function(props)
         children
     } = props;
 
-    const defaultStyle: CSSProperties = {
+    const defaultStyle: React.CSSProperties = {
         boxSizing: "border-box",
         position: "relative",
         flex: `${grow} ${shrink} ${basis}`

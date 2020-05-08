@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import Draggable, { PointerEvent } from "./Draggable";
 import Color from "@ff/core/Color";
@@ -111,16 +111,16 @@ export default class Dial extends React.Component<IDialProps, any>
     {
         const props = this.props;
 
-        let style: CSSProperties = {
+        let style: React.CSSProperties = {
             position: "relative",
             width: props.size
         };
 
-        let canvasStyle: CSSProperties = {
+        let canvasStyle: React.CSSProperties = {
             display: "block"
         };
 
-        let labelStyle: CSSProperties = {
+        let labelStyle: React.CSSProperties = {
             display: "block",
             position: "absolute",
             top: props.type === "gauge" ? "-3%" : 0,

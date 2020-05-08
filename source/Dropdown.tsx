@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
+
 import { ChangeEvent, CSSProperties } from "react";
 
 import { IComponentEvent, IComponentProps } from "./common";

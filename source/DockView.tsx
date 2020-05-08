@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
 
 import ComponentFactory from "./ComponentFactory";
 import { SplitterContainer, SplitterSection, ISplitterContainerResizeEvent } from "./Splitter";

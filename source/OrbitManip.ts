@@ -7,7 +7,7 @@
 
 import math from "@ff/core/math";
 import { IManipEventHandler, IPointerEvent, ITriggerEvent } from "./ManipTarget";
-import { PointerEventSource, PointerEventType, TriggerEventType } from "@ff/browser/ManipTarget";
+//import { PointerEventSource, PointerEventType, TriggerEventType } from "@ff/browser/ManipTarget";
 
 ////////////////////////////////////////////////////////////////////////////////
 

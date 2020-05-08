@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentEvent, IComponentProps } from "./common";
 import FlexItem from "./FlexItem";
@@ -41,7 +41,7 @@ export class DockTabContentContainer
         className: "ff-dock-tab-content-container"
     };
 
-    protected static readonly style: CSSProperties = {
+    protected static readonly style: React.CSSProperties = {
         position: "absolute",
         top: 0, left: 0, right: 0, bottom: 0
     };

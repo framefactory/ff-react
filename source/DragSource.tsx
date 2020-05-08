@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
+
 import { CSSProperties, ReactElement } from "react";
 
 import Draggable, { IDraggableProps, PointerEvent } from "./Draggable";

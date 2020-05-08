@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
+
 import { CSSProperties, PointerEvent as ReactPointerEvent, KeyboardEvent } from "react";
 
 import { IComponentEvent, IComponentProps } from "./common";

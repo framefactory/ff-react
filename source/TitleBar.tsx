@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,16 +37,16 @@ export default class TitleBar extends React.Component<ITitleBarProps, any>
             children,
         } = this.props;
 
-        let barStyle: CSSProperties = {
+        let barStyle: React.CSSProperties = {
         };
 
-        let textStyle: CSSProperties = {
+        let textStyle: React.CSSProperties = {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis"
         };
 
-        let buttonsStyle: CSSProperties = {
+        let buttonsStyle: React.CSSProperties = {
             float: "right",
             whiteSpace: "nowrap",
             overflow: "hidden"

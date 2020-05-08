@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { DockArea } from "./DockController";
 
@@ -27,7 +27,7 @@ export default class DockSprite extends React.Component<IDockSpriteProps, any>
         className: "ff-dock-sprite",
     };
 
-    private static style: CSSProperties = {
+    private static style: React.CSSProperties = {
         boxSizing: "border-box",
         position: "absolute",
         top: "0", left: "0", right: "0", bottom: "0",

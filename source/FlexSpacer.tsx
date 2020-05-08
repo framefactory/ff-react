@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -20,7 +20,7 @@ export interface IFlexSpacerProps extends IComponentProps
     basis?: string;
 }
 
-const FlexSpacer: React.SFC<IFlexSpacerProps> = function(props)
+const FlexSpacer: React.FunctionComponent = function(props: React.PropsWithChildren<IFlexSpacerProps>)
 {
     const {
         className,
@@ -30,7 +30,7 @@ const FlexSpacer: React.SFC<IFlexSpacerProps> = function(props)
         basis
     } = props;
 
-    const defaultStyle: CSSProperties = {
+    const defaultStyle: React.CSSProperties = {
         flex: `${grow} ${shrink} ${basis}`
     };
 

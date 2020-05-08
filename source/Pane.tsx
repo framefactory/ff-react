@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -18,7 +18,7 @@ export default class Pane extends React.Component<any, any>
         </div>);
     }
 
-    private static style: CSSProperties = {
+    private static style: React.CSSProperties = {
         boxSizing: "border-box",
         position: "absolute",
         left: 0, right: 0, top: 0, bottom: 0

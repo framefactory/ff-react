@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentEvent, IComponentProps } from "./common";
 import Button from "./Button";
@@ -23,7 +23,7 @@ export class TabHeaderContainer extends React.Component<ITabHeaderContainerProps
         className: "ff-tab-header-container"
     };
 
-    protected static readonly style: CSSProperties = {
+    protected static readonly style: React.CSSProperties = {
         whiteSpace: "nowrap"
     };
 

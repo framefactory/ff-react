@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
+
 import { CSSProperties, PointerEvent, KeyboardEvent } from "react";
 
 import * as ReactDOM from "react-dom";

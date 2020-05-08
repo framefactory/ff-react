@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentEvent, IComponentProps } from "./common";
 
@@ -54,7 +54,7 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
         className: "ff-canvas"
     };
 
-    protected static readonly style: CSSProperties = {
+    protected static readonly style: React.CSSProperties = {
         display: "block",
         width: "100%",
         height: "100%"

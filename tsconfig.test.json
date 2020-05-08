@@ -5,6 +5,7 @@
         "module": "commonjs",
         "experimentalDecorators": true,
         "jsx": "react",
+        "jsxFactory": "jsx",
 
         "declaration": true,
         "sourceMap": true,

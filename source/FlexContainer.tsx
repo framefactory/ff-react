@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -35,7 +35,7 @@ export interface IFlexContainerProps extends IComponentProps
     basis?: string;
 }
 
-const _defaultStyle: CSSProperties = {
+const _defaultStyle: React.CSSProperties = {
     boxSizing: "border-box",
     display: "flex"
 };

@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
 
 import ManipTargetHelper, { IManip, IPointerEvent, ITriggerEvent } from "@ff/browser/ManipTarget";
 import { IComponentProps } from "./common";

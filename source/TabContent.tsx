@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import FlexItem from "./FlexItem";
 import { IComponentProps } from "./common";
@@ -51,7 +51,7 @@ export class TabContentItem extends React.Component<ITabContentItemProps, {}>
         className: "ff-tab-content-item"
     };
 
-    protected static readonly style: CSSProperties = {
+    protected static readonly style: React.CSSProperties = {
         position: "absolute",
         left: 0, top: 0, right: 0, bottom: 0,
         display: "initial",

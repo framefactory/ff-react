@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentEvent, IComponentProps } from "./common";
 import Draggable, { PointerEvent } from "./Draggable";
@@ -52,7 +52,7 @@ export default class FieldEdit extends React.Component<IFieldEditProps, IFieldEd
         className: "ff-control ff-property-field"
     };
 
-    static textStyle: CSSProperties = {
+    static textStyle: React.CSSProperties = {
         pointerEvents: "none",
         userSelect: "none",
         display: "block"

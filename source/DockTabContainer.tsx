@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { ReactElement } from "react";
+import { jsx } from "@emotion/core";
 
 import { ITabHeaderSelectEvent } from "./TabHeader";
 import TabContainer, { ITabContainerProps, ITabDropEvent } from "./TabContainer";
@@ -37,7 +37,7 @@ export default class DockTabContainer extends TabContainer<IDockTabContainerProp
         this.onDockableDrop = this.onDockableDrop.bind(this);
     }
 
-    protected renderContentContainer(children: ReactElement<any>[])
+    protected renderContentContainer(children: React.ReactElement[])
     {
         return (<DockTabContentContainer
             className="ff-content"

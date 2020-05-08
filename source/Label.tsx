@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -18,12 +18,12 @@ export interface ILabelProps extends IComponentProps
     text?: string;
 }
 
-const _defaultStyle: CSSProperties = {
+const _defaultStyle: React.CSSProperties = {
     flexShrink: 0,
     flexGrow: 0
 };
 
-const Label: React.SFC<ILabelProps> = function(props)
+const Label: React.FunctionComponent = function(props: React.PropsWithChildren<ILabelProps>)
 {
     const {
         className,

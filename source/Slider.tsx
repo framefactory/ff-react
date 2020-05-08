@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import math from "@ff/core/math";
 import ManipSource, { IManipListener, IManipEvent } from "./ManipSource";
@@ -43,7 +43,7 @@ export default class Slider extends React.Component<ISliderProps, ISliderState> 
     protected knobElement: HTMLDivElement;
     protected manip: ManipSource;
     protected sliderRect: ClientRect;
-    protected knobStyle: CSSProperties;
+    protected knobStyle: React.CSSProperties;
 
     constructor(props: ISliderProps)
     {

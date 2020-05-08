@@ -6,6 +6,8 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
+
 import { MouseEvent } from "react";
 
 import { IComponentProps } from "./common";

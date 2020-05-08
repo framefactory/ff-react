@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties, ReactNode } from "react";
+import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,7 @@ import { CSSProperties, ReactNode } from "react";
 export interface IContainerProps
 {
     className?: string;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
 }
 
 /**
@@ -27,7 +27,7 @@ export default class Container extends React.Component<IContainerProps, {}>
         className: "ff-container"
     };
 
-    public onRenderContent?: () => ReactNode = null;
+    public onRenderContent?: () => React.ReactNode = null;
 
     render()
     {

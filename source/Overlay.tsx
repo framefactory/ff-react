@@ -11,6 +11,8 @@ import * as ReactDOM from "react-dom";
 import { CSSProperties } from "react";
 import { IComponentProps } from "./common";
 
+import { jsx } from "@emotion/core";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /** Properties for [[Overlay]] component. */

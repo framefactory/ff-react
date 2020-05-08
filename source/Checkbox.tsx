@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import Button, {
     IButtonProps,
@@ -42,7 +42,7 @@ export default class Checkbox extends Button<CheckboxProps>
         shape: "square"
     };
 
-    static labelStyle: CSSProperties = {
+    static labelStyle: React.CSSProperties = {
         touchAction: "none",
         userSelect: "none",
         cursor: "pointer",
@@ -52,7 +52,7 @@ export default class Checkbox extends Button<CheckboxProps>
         //lineHeight: "1.3em"
     };
 
-    static squareFrameStyle: CSSProperties = {
+    static squareFrameStyle: React.CSSProperties = {
         position: "absolute",
         top: "0.1em",
         left: "0",
@@ -63,7 +63,7 @@ export default class Checkbox extends Button<CheckboxProps>
         borderWidth: "1px"
     };
 
-    static squareMarkStyle: CSSProperties = {
+    static squareMarkStyle: React.CSSProperties = {
         position: "absolute",
         top: "0.2em",
         left: "0.4em",
@@ -74,7 +74,7 @@ export default class Checkbox extends Button<CheckboxProps>
         transform: "rotate(45deg)"
     };
 
-    static circleFrameStyle: CSSProperties = {
+    static circleFrameStyle: React.CSSProperties = {
         position: "absolute",
         top: "0.1em",
         left: "0",
@@ -86,7 +86,7 @@ export default class Checkbox extends Button<CheckboxProps>
         borderRadius: "2em"
     };
 
-    static circleMarkStyle: CSSProperties = {
+    static circleMarkStyle: React.CSSProperties = {
         position: "absolute",
         top: "0",
         left: "0",

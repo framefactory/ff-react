@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { jsx } from "@emotion/core";
 
 import Button, { IButtonTapEvent } from "./Button";
 import Dialog, { Anchor, IDialogProps, IDialogTapModal } from "./Dialog";

@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 
@@ -39,7 +39,7 @@ export interface IGridContainerProps extends IComponentProps
     alignContent?: "start" | "end" | "center" | "stretch" | "space-around" | "space-between" | "space-evenly";
 }
 
-const _defaultStyle: CSSProperties = {
+const _defaultStyle: React.CSSProperties = {
     boxSizing: "border-box",
     display: "grid"
 };
@@ -60,7 +60,7 @@ const _interpretSize = function(value: string | number): string
  * @returns {React.SFC<IGridContainerProps>}
  * @constructor
  */
-const GridContainer: React.SFC<IGridContainerProps> = function(props)
+const GridContainer: React.FunctionComponent = function(props: React.PropsWithChildren<IGridContainerProps>)
 {
     const {
         className,

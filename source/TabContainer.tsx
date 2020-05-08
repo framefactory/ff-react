@@ -7,6 +7,7 @@
 
 import * as React from "react";
 import { ReactElement } from "react";
+import { jsx } from "@emotion/core";
 
 import FlexContainer from "./FlexContainer";
 

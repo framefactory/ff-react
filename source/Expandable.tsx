@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentProps } from "./common";
 import Button, { IButtonTapEvent } from "./Button";
@@ -52,7 +52,7 @@ export class ExpandableHeader extends React.Component<IExpandableHeaderProps, {}
 export interface IExpandableContentProps
 {
     className?: string;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
 }
 
 export class ExpandableContent extends React.Component<IExpandableContentProps, {}>

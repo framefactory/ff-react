@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 import { IComponentEvent, IComponentProps } from "./common";
 
@@ -46,13 +46,13 @@ export default class Canvas extends React.Component<ICanvasProps, {}>
         resolution: 1
     };
 
-    private static canvasStyle: CSSProperties = {
+    private static canvasStyle: React.CSSProperties = {
         display: "block",
         width: "100%",
         height: "100%"
     };
 
-    private static fullsizeStyle: CSSProperties = {
+    private static fullsizeStyle: React.CSSProperties = {
         position: "absolute",
         top: 0, right: 0, bottom: 0, left: 0
     };

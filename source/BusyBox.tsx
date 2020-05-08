@@ -6,7 +6,7 @@
  */
 
 import * as React from "react";
-import { CSSProperties } from "react";
+import { jsx } from "@emotion/core";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,7 @@ import { CSSProperties } from "react";
 export interface IBusyBoxProps
 {
     className?: string;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
     text?: string;
 }
 

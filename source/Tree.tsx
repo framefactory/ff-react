@@ -10,6 +10,8 @@ import { Dictionary } from "@ff/core/types";
 import * as React from "react";
 import { ReactNode } from "react";
 
+import { jsx } from "@emotion/core";
+
 ////////////////////////////////////////////////////////////////////////////////
 
 export interface ITreeNode
