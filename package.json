@@ -1,6 +1,6 @@
 {
     "name": "ff-react",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "FF React Typescript Foundation Library",
     "scripts": {
         "build": "tsc -p source",
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/framelab/ff-react.git"
+        "url": "git+https://github.com/framefactory/ff-react.git"
     },
     "keywords": [
         "typescript",
@@ -20,21 +20,21 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/framelab/ff-react/issues"
+        "url": "https://github.com/framefactory/ff-react/issues"
     },
-    "homepage": "https://github.com/framelab/ff-react#readme",
+    "homepage": "https://github.com/framefactory/ff-react#readme",
     "dependencies": {
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3"
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
     },
     "devDependencies": {
-        "@types/chai": "^4.2.11",
-        "@types/mocha": "^7.0.2",
-        "@types/react": "^16.9.34",
-        "@types/react-dom": "^16.9.7",
+        "@types/chai": "^4.2.14",
+        "@types/mocha": "^8.2.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
         "chai": "^4.2.0",
-        "mocha": "^7.1.2",
+        "mocha": "^8.2.1",
         "module-alias": "^2.2.2",
-        "typescript": "^3.8.3"
+        "typescript": "^4.1.3"
     }
 }
