@@ -9,10 +9,10 @@ import * as path from "path";
 import * as moduleAlias from "module-alias";
 
 moduleAlias.addAliases({
-    "@ff/react": path.resolve(__dirname, "../export"),
-    "@ff/core": path.resolve(__dirname, "../../../ff-core/built/export"),
-    "@ff/browser": path.resolve(__dirname, "../../../ff-browser/built/export"),
-    "@ff/graph": path.resolve(__dirname, "../../../ff-graph/built/export"),
+    "@ff/react": path.resolve(__dirname, "../exports"),
+    "@ff/core": path.resolve(__dirname, "../../../core/dist/exports"),
+    "@ff/browser": path.resolve(__dirname, "../../../browser/dist/exports"),
+    "@ff/graph": path.resolve(__dirname, "../../../graph/dist/exports"),
 });
 
 // define vars on node global object (usually done by Webpack)
